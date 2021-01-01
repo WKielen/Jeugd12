@@ -2,6 +2,18 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.5.
 
+npm install -g @angular/cli
+ng new Jeugd11 --routing --strict
+ng add @angular/pwa
+ng add @angular/material
+npm install --save @auth0/angular-jwt
+npm install --save ts-md5
+npm install --save @angular/flex-layout
+npm install --save moment
+npm install --save @angular/localize
+
+
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
