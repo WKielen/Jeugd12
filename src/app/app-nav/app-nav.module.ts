@@ -20,6 +20,11 @@ import { DefaultComponent } from './default/default.component';
 // import { OfflineComponent } from './offline/offline.component';
 import { CustomMaterialModule } from '../material.module';
 import { HeaderComponent } from './header/header.component';
+import { NotallowedComponent } from './notallowed/notallowed.component';
+import { OfflineComponent } from './offline/offline.component';
+import { LoginComponent } from './login/login.component';
+import { SigninComponent } from './signin/signin.component';
+import { HttpClientModule } from '@angular/common/http';
 // import { RegisterDialogComponent } from './register-dialog/register.dialog';
 // import { RegistrationComponent } from './registration/registration.component';
 // import { HoldableModule } from '../shared/directives/directives.module';
@@ -38,9 +43,10 @@ import { HeaderComponent } from './header/header.component';
     // ConfigDialogComponent,
     // NotificationDialogComponent,
     // A2hsSafariHow2,
-    // NotallowedComponent,
-    // OfflineComponent,
-    // LoginComponent,
+    NotallowedComponent,
+    OfflineComponent,
+    LoginComponent,
+    SigninComponent,
     // SignInDialogComponent,
     // RegisterDialogComponent,
     // RegistrationComponent,
@@ -54,8 +60,9 @@ import { HeaderComponent } from './header/header.component';
     FlexLayoutModule,
     RouterModule,
     BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
+    HttpClientModule,
+    // FormsModule,  // Voor template forms
+    ReactiveFormsModule,   // Voor reactive forms
     BrowserAnimationsModule,
     LayoutModule,
     CustomMaterialModule,

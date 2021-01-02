@@ -1,20 +1,24 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DefaultComponent } from './app-nav/default/default.component';
+import { LoginComponent } from './app-nav/login/login.component';
+import { NotallowedComponent } from './app-nav/notallowed/notallowed.component';
+import { OfflineComponent } from './app-nav/offline/offline.component';
+import { SigninComponent } from './app-nav/signin/signin.component';
 import { MainComponent } from './my-pages/main/main.component';
+import { AuthGuard } from './services/auth.guard';
 import { ROUTE } from './services/website.service';
 
 const routes: Routes = [
-  // { path: ROUTE.loginPageRoute, component: LoginComponent },
-  // { path: ROUTE.offlinePageRoute, component: OfflineComponent },
-  // { path: '', component: MainComponent},//canActivate: [AuthGuard],
-
+  { path: ROUTE.loginPageRoute, component: LoginComponent },
+  { path: ROUTE.offlinePageRoute, component: OfflineComponent },
+  { path: ROUTE.signInPageRoute, component: SigninComponent },
   {
-    path: '', component: DefaultComponent,//canActivate: [AuthGuard],
+    path: '', component: DefaultComponent, canActivate: [AuthGuard],
     children: [
-      // { path: ROUTE.notAllowedPageRoute, component: NotallowedComponent  },
+      { path: ROUTE.notAllowedPageRoute, component: NotallowedComponent  },
   //     { path: ROUTE.komendeweekPageRoute, component: KomendeWeekComponent, canActivate: [AuthGuard] },
-      { path: ROUTE.mainPageRoute, component: MainComponent }, //canActivate: [AuthGuard] },
+      { path: ROUTE.mainPageRoute, component: MainComponent, canActivate: [AuthGuard] },
   //     { path: ROUTE.ledenPageRoute, component: LedenComponent, canActivate: [AuthGuard, AdminAuthGuard], data: { roles: PAGEROLES.ledenPageRoles } },
   //     { path: ROUTE.ledenmanagerPageRoute, component: LedenManagerComponent, canActivate: [AuthGuard, AdminAuthGuard], data: { roles: PAGEROLES.ledenmanagerPageRoles } },
   //     { path: ROUTE.agendaPageRoute, component: AgendaComponent, canActivate: [AuthGuard, AdminAuthGuard], data: { roles: PAGEROLES.agendaPageRoles } },
