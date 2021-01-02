@@ -2,10 +2,15 @@ ul li {
   list-style: none;
 }
 
-mat-toolbar {
-  margin-top: -10px;
-  margin-bottom: -10px;
-  vertical-align: middle;
+.mat-toolbar {
+  min-height: 44px !important; 
+  height: 44px !important;
+}
+
+.mat-toolbar-row {
+  margin-top: 2px;
+  min-height: 40px !important; 
+  height: 40px !important;
 }
 
 img {
