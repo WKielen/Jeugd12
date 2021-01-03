@@ -48,6 +48,8 @@ import { MainComponent } from './main/main.component';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    CustomMaterialModule,
+
     // BrowserAnimationsModule,
     // LayoutModule,
     // HttpClientModule,
