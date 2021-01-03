@@ -35,7 +35,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatTabsModule,
     MatIconModule,
     MatCardModule,
-    // MatDialogModule,
+    MatDialogModule,
     // MatFormFieldModule,
     // MatSidenavModule,
     // MatListModule,

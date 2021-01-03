@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { ROUTE } from 'src/app/services/website.service';
+import { MatDialog } from '@angular/material/dialog';
+import { SignInDialogComponent } from '../sign-in-dialog/sign-in.dialog';
 
 @Component({
   selector: 'app-login',
@@ -10,10 +10,10 @@ import { ROUTE } from 'src/app/services/website.service';
 export class LoginComponent {
 
   constructor(
-    private router: Router,
+    public signinDialog: MatDialog,
   ) { }
 
   routeToSignin(): void {
-    this.router.navigate([ROUTE.signInPageRoute as string]);
+    this.signinDialog.open(SignInDialogComponent, { width: '400px' });
   }
 }

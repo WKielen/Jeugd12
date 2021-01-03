@@ -16,15 +16,17 @@ import { DefaultComponent } from './default/default.component';
 // import { A2hsSafariHow2 } from '../shared/components/a2hs-ios-safari-how2/a2hs-ios-safari-how2';
 // import { LoginComponent } from './login/login.component';
 // import { NotallowedComponent } from './notallowed/notallowed.component';
-// import { SignInDialogComponent } from './sign-in-dialog/sign-in.dialog';
+import { SignInDialogComponent } from './sign-in-dialog/sign-in.dialog';
 // import { OfflineComponent } from './offline/offline.component';
 import { CustomMaterialModule } from '../material.module';
 import { HeaderComponent } from './header/header.component';
 import { NotallowedComponent } from './notallowed/notallowed.component';
 import { OfflineComponent } from './offline/offline.component';
 import { LoginComponent } from './login/login.component';
-import { SigninComponent } from './signin/signin.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SharedComponentsModule } from '../shared/components/component.module';
+import { RegisterDialogComponent } from './register-dialog/register.dialog';
+import { ResetPasswordDialogComponent } from './resetpassword-dialog/password.reset.dialog';
 // import { RegisterDialogComponent } from './register-dialog/register.dialog';
 // import { RegistrationComponent } from './registration/registration.component';
 // import { HoldableModule } from '../shared/directives/directives.module';
@@ -46,14 +48,13 @@ import { HttpClientModule } from '@angular/common/http';
     NotallowedComponent,
     OfflineComponent,
     LoginComponent,
-    SigninComponent,
-    // SignInDialogComponent,
-    // RegisterDialogComponent,
+    SignInDialogComponent,
+    RegisterDialogComponent,
     // RegistrationComponent,
     // RegistrationDetailDialogComponent,
     // RegistrationDialogComponent,
     // RolesDialogComponent,
-    // ResetPasswordDialogComponent,
+    ResetPasswordDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -67,7 +68,7 @@ import { HttpClientModule } from '@angular/common/http';
     LayoutModule,
     CustomMaterialModule,
     // HoldableModule,
-    // SharedComponentsModule,
+    SharedComponentsModule,
   ],
 })
 

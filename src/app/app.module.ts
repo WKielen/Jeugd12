@@ -9,9 +9,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MyPagesModule } from './my-pages/my-pages.module';
 import { AppNavModule } from './app-nav/app-nav.module';
 import { CustomMaterialModule } from './material.module';
+import { ParentComponent } from './shared/parent.component';
 
 @NgModule({
   declarations: [
+    AppComponent,
+    ParentComponent,
     AppComponent
   ],
   imports: [

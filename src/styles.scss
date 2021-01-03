@@ -29,3 +29,69 @@ $alt-theme: mat-light-theme($alt-theme-primary, $custom-theme-accent, $custom-th
 }
 
 @import "src/variables.scss";
+
+
+
+//
+// Material boxes and dialogs
+//
+:root {
+  mat-card {
+    padding: 0 0 10px 0;
+    border-radius: 5px;
+    box-shadow: 5px 10px 10px lightgrey !important;
+    background: white;
+    margin-bottom: 10px;
+  }
+
+  mat-card-header {
+    border-radius: 5px 5px 0px 0px;
+    background: #0d47a1;
+  }
+
+  mat-card-title {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 18px !important;
+    font-weight: 500;
+    color: white;
+    margin: 0px !important;
+    padding: 10px 10px 10px 9px;
+  }
+
+  mat-card-content {
+    padding: 25px 25px 15px 25px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+  }
+
+  mat-card-actions {
+    margin: 0px !important;
+    padding: 0px 0px 0px 25px !important;
+  }
+
+  .mat-dialog-container {
+    padding: 0px !important;
+    border-radius: 5px;
+  }
+
+  .mat-dialog-title {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 18px !important;
+    font-weight: 500;
+    background: #0d47a1;
+    color: white;
+    margin: 0px !important;
+    padding: 10px 10px 10px 25px;
+  }
+
+  mat-dialog-content {
+    margin: 0px !important;
+    padding: 25px 25px 15px 25px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    width: fit-content;
+  }
+
+  mat-dialog-actions {
+    margin: 0px !important;
+    padding: 0px 25px 0px 25px !important;
+  }
+}

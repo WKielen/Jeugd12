@@ -4,7 +4,6 @@ import { DefaultComponent } from './app-nav/default/default.component';
 import { LoginComponent } from './app-nav/login/login.component';
 import { NotallowedComponent } from './app-nav/notallowed/notallowed.component';
 import { OfflineComponent } from './app-nav/offline/offline.component';
-import { SigninComponent } from './app-nav/signin/signin.component';
 import { MainComponent } from './my-pages/main/main.component';
 import { AuthGuard } from './services/auth.guard';
 import { ROUTE } from './services/website.service';
@@ -12,7 +11,6 @@ import { ROUTE } from './services/website.service';
 const routes: Routes = [
   { path: ROUTE.loginPageRoute, component: LoginComponent },
   { path: ROUTE.offlinePageRoute, component: OfflineComponent },
-  { path: ROUTE.signInPageRoute, component: SigninComponent },
   {
     path: '', component: DefaultComponent, canActivate: [AuthGuard],
     children: [
