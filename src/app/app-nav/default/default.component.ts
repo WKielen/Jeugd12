@@ -41,7 +41,7 @@ export class DefaultComponent implements OnInit {
     this.sideBarSetVisibilty(!this.sideBarOpen);
   }
 
-  sideBarSetVisibilty($event: boolean) {
+  sideBarSetVisibilty($event: any) {
     this.sideBarOpen = $event;
   }
 }

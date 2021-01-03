@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 
 // import { HeaderComponent } from './header/header.component';
 // import { FooterComponent } from './footer/footer.component';
-// import { SidebarComponent } from './sidebar/sidebar.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 // import { ConfigDialogComponent } from './headerconfigdialog/config.dialog';
 // import { NotificationDialogComponent } from './headernotificationdialog/notification.dialog';
 import { BrowserModule } from '@angular/platform-browser';
@@ -41,7 +41,7 @@ import { ResetPasswordDialogComponent } from './resetpassword-dialog/password.re
     DefaultComponent,
     HeaderComponent,
     // FooterComponent,
-    // SidebarComponent,
+    SidebarComponent,
     // ConfigDialogComponent,
     // NotificationDialogComponent,
     // A2hsSafariHow2,
