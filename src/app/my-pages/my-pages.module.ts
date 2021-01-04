@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './main/home.component';
+import { SharedComponentsModule } from '../shared/components/component.module';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,7 @@ import { HomeComponent } from './main/home.component';
     // AngularEditorModule,
     // HoldableModule,
     // AngularIbanModule,
-    // SharedComponentsModule,
+    SharedComponentsModule,
 
   ],
 })

@@ -95,3 +95,36 @@ $alt-theme: mat-light-theme($alt-theme-primary, $custom-theme-accent, $custom-th
     padding: 0px 25px 0px 25px !important;
   }
 }
+
+
+//
+// Flex-Contrainer: Voor GROTE schermen, hebben we een kolommen naast elkaar
+//
+@media (min-width: $desktop) {
+  .flexcontainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    background-color: green;
+  }
+}
+
+//
+// Flex-Contrainer: Voor KLEINE schermen, hebben we een kolommen onder elkaar
+//
+@media (max-width: $desktop - 1px) {
+  .flexcontainer {
+    display: flex;
+    flex-direction: column !important;
+    justify-content: center;
+    background-color: blue;
+  }
+
+  .hideonmobile {
+    // Hiermee kan je elementen verbergen op een mobiel
+    display: none;
+  }
+}
+
+
