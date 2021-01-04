@@ -17,25 +17,7 @@ import { ErrorHandler, LOCALE_ID } from '@angular/core';
 import { AppErrorHandler } from './shared/error-handling/app-error-handler';
 import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-
-
-// import { AuthService } from './services/auth.service';
-// import { AuthGuard } from './services/auth.guard';
-// import { AdminAuthGuard } from './services/admin-auth-guard.service';
-// import { LedenService } from './services/leden.service';
-// import { ReadTextFileService } from './services/readtextfile.service';
-// import { AgendaService } from './services/agenda.service';
-// import { ParamService } from './services/param.service';
-// import { MailService } from './services/mail.service';
-// import { TrainingService } from './services/training.service';
-// import { NotificationService } from './services/notification.service';
-// import { UserService } from './services/user.service';
-// // Onderstaande 3 om bedragen in NL vorm weer te geven via pipe
-// import { registerLocaleData, APP_BASE_HREF, LocationStrategy, HashLocationStrategy } from '@angular/common';
-// import localeNl from '@angular/common/locales/nl';
-// // Material Date Locale hieronder toegevoegd voor Angular 9 conversie
-// import { BaseComponent } from './shared/base.component';
-// import { WebsiteService } from './services/website.service';
+import { CustomPipesModule } from './services/custom.pipes';
 
 @NgModule({
   declarations: [
@@ -47,10 +29,12 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
     AppNavModule,
     MyPagesModule,
     CustomMaterialModule,
+    CustomPipesModule,
     BrowserModule,
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+
   ],
   providers: [
     {

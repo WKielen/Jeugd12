@@ -11,7 +11,7 @@ import { AgendaService, IAgendaItem } from 'src/app/services/agenda.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent extends BaseComponent implements OnInit {
-  private nbrTabs: number = 4;
+  private nbrTabs: number = 3;
   public announcements: Array<IWebsiteText> = [];
   public agenda: Array<IAgendaItem> = [];
   public role: string = 'JE';

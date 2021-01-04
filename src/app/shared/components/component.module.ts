@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { CustomMaterialModule } from 'src/app/material.module';
+import { CustomPipesModule } from 'src/app/services/custom.pipes';
 import { A2hsComponent } from './a2hs/a2hs.component';
 import { AgendaPageComponent } from './agenda.page';
 import { AnnouncementPageComponent } from './announcement.page';
@@ -18,7 +19,7 @@ import { DialogMessageBoxComponent } from './dialog.message.box';
   imports: [
     CommonModule,
     CustomMaterialModule,
-
+    CustomPipesModule,
   ],
   exports: [
     A2hsComponent,
