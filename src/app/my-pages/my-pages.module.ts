@@ -7,7 +7,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
 import { HttpClientModule } from '@angular/common/http';
-import { MainComponent } from './main/main.component';
+import { HomeComponent } from './main/home.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +41,7 @@ import { MainComponent } from './main/main.component';
     // TodolistComponent,
     // TodoListDetailDialogComponent,
     // TodoListDialogComponent,
-  MainComponent],
+  HomeComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
