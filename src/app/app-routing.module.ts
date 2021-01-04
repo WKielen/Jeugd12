@@ -16,7 +16,7 @@ const routes: Routes = [
     children: [
       { path: ROUTE.notAllowedPageRoute, component: NotallowedComponent  },
   //     { path: ROUTE.komendeweekPageRoute, component: KomendeWeekComponent, canActivate: [AuthGuard] },
-      { path: ROUTE.mainPageRoute, component: HomeComponent, canActivate: [AuthGuard] },
+      { path: ROUTE.homePageRoute, component: HomeComponent, canActivate: [AuthGuard] },
   //     { path: ROUTE.ledenPageRoute, component: LedenComponent, canActivate: [AuthGuard, AdminAuthGuard], data: { roles: PAGEROLES.ledenPageRoles } },
   //     { path: ROUTE.ledenmanagerPageRoute, component: LedenManagerComponent, canActivate: [AuthGuard, AdminAuthGuard], data: { roles: PAGEROLES.ledenmanagerPageRoles } },
   //     { path: ROUTE.agendaPageRoute, component: AgendaComponent, canActivate: [AuthGuard, AdminAuthGuard], data: { roles: PAGEROLES.agendaPageRoles } },

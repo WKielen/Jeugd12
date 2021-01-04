@@ -68,7 +68,7 @@ export class SignInDialogComponent extends BaseComponent implements OnInit {
       .subscribe(result => {
         if (result) {
           const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
-          this.router.navigate([returnUrl || ROUTE.mainPageRoute]);
+          this.router.navigate([returnUrl || ROUTE.homePageRoute]);
           this.dialogRef.close(true);
         } else {
           this.responseText = "De combinatie van Userid en Wachtwoord bestaat niet";

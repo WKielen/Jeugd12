@@ -133,5 +133,8 @@
       }
     }
   },
-  "defaultProject": "Jeugd"
+  "defaultProject": "Jeugd",
+  "cli": {
+    "analytics": "c446ca7b-13d1-4203-83e5-e047138a5900"
+  }
 }
