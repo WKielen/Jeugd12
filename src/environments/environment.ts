@@ -12,7 +12,7 @@ export const environment = {
   mailUrl: 'http://84.104.233.194:5001',
 
   // de proxy url stuurt requests door naar de Rasp.Pi. Dit kan ook direct natuurlijk maar we gebruiken deze proxy om de https te ontwijken op de Pi
-  // de service worker wil namelijk alleen via https en de pi heeft dit niet. 
+  // de service worker wil namelijk alleen via https en de pi heeft dit niet.
   proxyUrl: 'https://www.ttvn.nl/api/proxy/'
 
 };

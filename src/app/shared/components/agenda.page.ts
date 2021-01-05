@@ -30,7 +30,7 @@ import { BaseComponent } from '../base.component';
               <td>DoelGroep:</td>
               <td>{{ item.DoelGroep | doelgroep}}</td>
             </tr>
-            <tr *ngIf="item.Toelichting">
+            <tr class='top' *ngIf="item.Toelichting">
               <td>Toelichting:</td>
               <td>
                 <div [innerHTML]="item.Toelichting"></div>
@@ -81,8 +81,8 @@ import { BaseComponent } from '../base.component';
              background: white; margin: 5px; border-radius: 5px;
              `,
     '.internalcardcontent { margin: 10px 10px 10px 10px;',
-    '#evenementnaam { font-size: 16px; font-weight: bolder; padding: 5px 10px 0px 10px; }',
-    '#table { width: 100%; tr { td { text-align: left; vertical-align: top; } } }'
+    '#evenementnaam { font-size: 16px; font-weight: bolder; padding: 5px 10px 0px 15px; }',
+    '.top { text-align: left; vertical-align: top; }'
   ],
 })
 

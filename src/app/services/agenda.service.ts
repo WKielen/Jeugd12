@@ -1,8 +1,8 @@
 import { environment } from './../../environments/environment';
-import { Injectable, Pipe, PipeTransform } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DataService } from './data.service';
-import { tap, map, retry } from 'rxjs/operators';
+import { tap, retry } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
@@ -43,7 +43,6 @@ export class AgendaService extends DataService {
         )
       );
   }
-
 }
 
 /***************************************************************************************************
@@ -89,13 +88,6 @@ export class OrganisatieValues
   }
 }
 
-@Pipe({ name: 'organisatie' })
-export class OrganisatiePipe implements PipeTransform {
-  transform(input: string): string {
-    return OrganisatieValues.GetLabel(input);
-  }
-}
-
 /***************************************************************************************************
 /
 /***************************************************************************************************/
@@ -109,13 +101,6 @@ export class DoelgroepValues {
       return '';
     }
     return this.table.find(x => x.Value === value).Label;
-  }
-}
-
-@Pipe({ name: 'doelgroep' })
-export class DoelgroepPipe implements PipeTransform {
-  transform(input: string): string {
-    return DoelgroepValues.GetLabel(input);
   }
 }
 
@@ -137,26 +122,3 @@ export class TypeValues {
     return this.table.find(x => x.Value === value).Label;
   }
 }
-
-@Pipe({ name: 'evenementtype' })
-export class EvenementTypePipe implements PipeTransform {
-  transform(input: string): string {
-    return TypeValues.GetLabel(input);
-  }
-}
-
-/***************************************************************************************************
-/ 
-/***************************************************************************************************/
-@Pipe({ name: 'formattedamount' })
-export class FormattedAmountPipe implements PipeTransform {
-  transform(input: string): string {
-    return '€ ' + Number(input).toLocaleString('nl', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  }
-}
-
-
-
-
-
-
