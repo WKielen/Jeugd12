@@ -35,31 +35,6 @@ export class ParamService extends DataService {
         catchError(this.errorHandler)
       );
   }
-
-  /***************************************************************************************************
-  / Create a Parameter in the database
-  /***************************************************************************************************/
-  // createParamData$(Id: string, Value: any, Description: string): Observable<Object> {
-  //   let paramItem = new ParamItem();
-  //   paramItem.Id = Id;
-
-  //   paramItem.Value = btoa(Value ? Value : '');     // btoa = encrypt
-  //   paramItem.Description = Description ? Description : '';
-
-  //   return this.create$(paramItem);
-  // }
-
-  /***************************************************************************************************
-  / The Update statement of a param
-  /***************************************************************************************************/
-  // saveParamData$(Id: string, Value: any, Description: string): Observable<Object> {
-  //   let paramItem = new ParamItem();
-  //   paramItem.Id = Id;
-  //   paramItem.Value = btoa(Value);
-  //   paramItem.Description = Description ? Description : '';
-
-  //   return super.update$(paramItem);
-  // }
 }
 
 /***************************************************************************************************

@@ -5,6 +5,7 @@ import { LoginComponent } from './app-nav/login/login.component';
 import { NotallowedComponent } from './app-nav/notallowed/notallowed.component';
 import { OfflineComponent } from './app-nav/offline/offline.component';
 import { HomeComponent } from './my-pages/main/home.component';
+import { MijnGegevensComponent } from './my-pages/mijngegevens/mijngegevens.component';
 import { AuthGuard } from './services/auth.guard';
 import { ROUTE } from './services/website.service';
 
@@ -16,7 +17,8 @@ const routes: Routes = [
     children: [
       { path: ROUTE.notAllowedPageRoute, component: NotallowedComponent  },
   //     { path: ROUTE.komendeweekPageRoute, component: KomendeWeekComponent, canActivate: [AuthGuard] },
-      { path: ROUTE.homePageRoute, component: HomeComponent, canActivate: [AuthGuard] },
+  { path: ROUTE.homePageRoute, component: HomeComponent, canActivate: [AuthGuard] },
+  { path: ROUTE.gegevensPageRoute, component: MijnGegevensComponent, canActivate: [AuthGuard] },
   //     { path: ROUTE.ledenPageRoute, component: LedenComponent, canActivate: [AuthGuard, AdminAuthGuard], data: { roles: PAGEROLES.ledenPageRoles } },
   //     { path: ROUTE.ledenmanagerPageRoute, component: LedenManagerComponent, canActivate: [AuthGuard, AdminAuthGuard], data: { roles: PAGEROLES.ledenmanagerPageRoles } },
   //     { path: ROUTE.agendaPageRoute, component: AgendaComponent, canActivate: [AuthGuard, AdminAuthGuard], data: { roles: PAGEROLES.agendaPageRoles } },

@@ -7,10 +7,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './main/home.component';
 import { SharedComponentsModule } from '../shared/components/component.module';
+import { MijnGegevensComponent } from './mijngegevens/mijngegevens.component';
 
 @NgModule({
   declarations: [
-    HomeComponent],
+    HomeComponent,
+    MijnGegevensComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
