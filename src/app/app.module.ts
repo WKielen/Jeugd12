@@ -18,6 +18,7 @@ import { AppErrorHandler } from './shared/error-handling/app-error-handler';
 import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { CustomPipesModule } from './services/custom.pipes';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { CustomPipesModule } from './services/custom.pipes';
 
   ],
   providers: [
+    AuthService,  // belangrijk omdat hierdoor hetzelfde object van deze service in alle componenten beschikbaar is.
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
