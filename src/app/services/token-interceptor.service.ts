@@ -1,16 +1,15 @@
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpInterceptor } from '@angular/common/http';
-import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenInterceptorService implements HttpInterceptor {
 
-  constructor(private authService: AuthService
-            , private router: Router
+  constructor(private router: Router
     ) { }
 
   intercept (req: any, next: any) {
@@ -20,15 +19,21 @@ export class TokenInterceptorService implements HttpInterceptor {
       return [];
     }
 
+    let token = localStorage.getItem('token');
+    if (token) {
+      let  jwtHelper: JwtHelperService = new JwtHelperService();
+      token = jwtHelper.isTokenExpired(token) ? null : token;
+    }
+
     let tokenizedReq;
-    if (this.authService.isLoggedIn()) {
+    if (token) {
       tokenizedReq = req.clone({
         // setHeaders: {
         //   'Authorization': 'Bearer ' + this.authService.token
         // , 'Content-Type' : 'application/json'
         // , 'Accept': 'application/json'
         // }
-        headers: req.headers.set('Authorization', 'Bearer ' + this.authService.token)
+        headers: req.headers.set('Authorization', 'Bearer ' + token)
                             .set('Content-Type', 'application/json')
                             .set('Accept', 'application/json')
       });
