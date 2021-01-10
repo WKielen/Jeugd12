@@ -1,6 +1,7 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BaseComponent } from '../base.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
   selector: 'signofftraining-box',
@@ -9,6 +10,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
     <form [formGroup]="afzegForm" novalidate>
       <div class="internalcard flexcontainer">
         <div id="evenementnaam">Afzeggen training</div>
+
+        <mat-chip-list multiple>
+          <mat-chip *ngFor="let chip of chips; index as i" [selected]="chip.selected" (selectionChange)="changeSelected($event)" (click)="chip.selected=!chip.selected">{{chip.name}}</mat-chip>
+        </mat-chip-list>
+
+
         <mat-form-field style="width: 40%; ;margin-left:10px">
           <input matInput placeholder="Kies datum waarop je niet kan" [matDatepicker]="startpicker" formControlName="startdate" required>
           <mat-datepicker-toggle matSuffix [for]="startpicker"></mat-datepicker-toggle>
@@ -43,10 +50,22 @@ export class SignoffTrainingBoxComponent extends BaseComponent {
 
   @Input('allgroups') allgroups: Array<ITrainingstijdItem> = [];
   @Input('mygroups') mygroups: Array<string> = [];
+  @Output('signoff') signoff = new EventEmitter();
 
   constructor() {
     super();
   }
+
+  chips = [
+    { name: 'Papadum', selected: true },
+    { name: 'Naan', selected: false },
+    { name: 'Dal', selected: false }
+  ];
+
+  changeSelected($event: any) {
+    console.log('chip', $event)
+  }
+
 
 
   afzegForm = new FormGroup({
@@ -65,12 +84,20 @@ export class SignoffTrainingBoxComponent extends BaseComponent {
     return this.afzegForm.get('reasontext');
   }
 
-  get startdate():any {
+  get startdate(): any {
     return this.afzegForm.get('startdate');
   }
 
-  onSubmit() { }
+  onSubmit() {
+    this.signoff.emit({ 'datum': FormValueToDutchDateString(this.startdate.value), 'reasontext': this.reasontext.value });
+  }
 }
+
+
+export function FormValueToDutchDateString(value: any): string {
+  return moment(value).format('YYYY-MM-DD');
+}
+
 
 export interface ITrainingstijdItem {
   Id: string;

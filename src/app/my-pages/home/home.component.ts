@@ -107,7 +107,9 @@ export class HomeComponent extends BaseComponent implements OnInit {
   }
 
 
-
+  signoff($event: any) {
+    console.log('sign off te verzenden', $event);
+  }
 
 
 
