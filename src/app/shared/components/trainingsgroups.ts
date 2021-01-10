@@ -6,8 +6,8 @@ import { BaseComponent } from '../base.component';
   template: `
     <small class="development" *ngIf="developmentMode">{{ me }}</small>
     <div class="internalcard">
-    <div id="evenementnaam">Mijn trainingstijden</div>
       <div class="internalcardcontent">
+        <div id="evenementnaam">Mijn trainingstijden</div>
         <div *ngIf="allgroups.length > 0">
           <table id="table">
             <tr>
@@ -48,7 +48,7 @@ export class TrainingsgroupsComponent extends BaseComponent implements OnChanges
       let color: string = 'lightgrey';
       this.mygroups.forEach(myGroup =>{
         if (item.Code == myGroup) {
-          color = 'green';
+          color = "#003d33"
         }
       })
       item.Color = color;

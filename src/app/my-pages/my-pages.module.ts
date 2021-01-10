@@ -5,7 +5,7 @@ import { CustomMaterialModule } from '../material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HomeComponent } from './main/home.component';
+import { HomeComponent } from './home/home.component';
 import { SharedComponentsModule } from '../shared/components/component.module';
 import { MijnGegevensComponent } from './mijngegevens/mijngegevens.component';
 

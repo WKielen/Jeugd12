@@ -41,7 +41,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
   }
 
   lid: LedenItem = new LedenItem();
-
+  mycolor="#0d47a1";
   /***************************************************************************************************
   / Lees het record uit de Param tabel
   /***************************************************************************************************/

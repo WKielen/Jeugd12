@@ -4,7 +4,7 @@ import { DefaultComponent } from './app-nav/default/default.component';
 import { LoginComponent } from './app-nav/login/login.component';
 import { NotallowedComponent } from './app-nav/notallowed/notallowed.component';
 import { OfflineComponent } from './app-nav/offline/offline.component';
-import { HomeComponent } from './my-pages/main/home.component';
+import { HomeComponent } from './my-pages/home/home.component';
 import { MijnGegevensComponent } from './my-pages/mijngegevens/mijngegevens.component';
 import { AuthGuard } from './services/auth.guard';
 import { ROUTE } from './services/website.service';

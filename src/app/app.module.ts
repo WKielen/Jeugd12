@@ -24,7 +24,6 @@ import { AuthService } from './services/auth.service';
   declarations: [
     AppComponent,
     ParentComponent,
-    AppComponent
   ],
   imports: [
     AppNavModule,

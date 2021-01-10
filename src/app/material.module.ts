@@ -10,6 +10,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
    exports: [
@@ -23,6 +24,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatSidenavModule,
     MatListModule,
     MatDividerModule,
+    MatDatepickerModule,
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
 })
