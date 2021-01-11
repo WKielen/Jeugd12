@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { forwardRef, Optional, SkipSelf } from '@angular/core';
 
@@ -24,10 +24,10 @@ export class AddComponentNameComponent {
   ngOnInit() {
   }
 
-  ngOnChanges() {
 
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('TODO lees changes uit')
   }
-
 }
 
 

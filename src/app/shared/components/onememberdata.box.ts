@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { BaseComponent } from '../base.component';
 
 @Component({
@@ -96,7 +96,9 @@ export class OneMemberDataBoxComponent extends BaseComponent implements OnChange
   @Input('lid') lid: ILedenItem = {};
   public volledigenaam: string = 'x';
 
-  ngOnChanges() {
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('TODO lees changes uit');
     this.volledigenaam = this.getFullNameVtA(this.lid.Voornaam, this.lid.Tussenvoegsel, this.lid.Achternaam)
 
   }

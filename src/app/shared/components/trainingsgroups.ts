@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { BaseComponent } from '../base.component';
 
 @Component({
@@ -43,7 +43,9 @@ export class TrainingsgroupsComponent extends BaseComponent implements OnChanges
   ngOnInit() {
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('TODO lees changes uit')
+
     this.allgroups.forEach(item => {
       let color: string = 'lightgrey';
       this.mygroups.forEach(myGroup =>{

@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { BaseComponent } from '../base.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
+import { addSyntheticLeadingComment } from 'typescript';
 
 @Component({
   selector: 'signofftraining-box',
@@ -46,7 +47,7 @@ import * as moment from 'moment';
   ],
 })
 
-export class SignoffTrainingBoxComponent extends BaseComponent {
+export class SignoffTrainingBoxComponent extends BaseComponent implements OnInit, OnChanges {
 
   @Input('allgroups') allgroups: Array<ITrainingstijdItem> = [];
   @Input('mygroups') mygroups: Array<string> = [];
@@ -55,15 +56,42 @@ export class SignoffTrainingBoxComponent extends BaseComponent {
   constructor() {
     super();
   }
+  next2weeks: any = [];
+  ngOnInit() {
+
+    let todayMoment = moment();
+    for (let i = 0; i < 14; i++) {
+      let thisday = todayMoment.add(i, 'day');
+      let daynaam = moment(thisday).locale('NL-nl').format('dd DD MMM');
+      let date = moment(thisday).format('yyyy-MM-dd');
+      this.next2weeks.push({ name: daynaam, selected: false, datum: date });
+    }
+  }
+
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.hasOwnProperty('mygroups')) {
+      if (this.mygroups.length == 0) return;
+      console.log(this.next2weeks);
+      this.next2weeks.forEach((aday:any) => {
+        this.mygroups.forEach((agroup: string) => {
+          console.log(aday.name.substring(0,2), agroup.substring(0,2).toLowerCase())
+          if (aday.name.substring(0,2) == agroup.substring(0,2).toLowerCase()) {
+            this.chips.push(aday);
+          }
+        })
+      })
+    }
+  }
 
   chips = [
-    { name: 'Papadum', selected: true },
+    { name: 'Papadnum', selected: true },
     { name: 'Naan', selected: false },
     { name: 'Dal', selected: false }
   ];
 
   changeSelected($event: any) {
-    console.log('chip', $event)
+    /* console.log('chip', $event) */
   }
 
 
