@@ -29,6 +29,7 @@ export class WebsiteService extends DataService {
   getPages() {
     let pages: Array<Page> = [];
     pages.push({ 'Id': '0', 'MenuDisplayValue': 'Home', 'DisplayOnRoles': '*', 'Url': ROUTE.homePageRoute });
+    pages.push({ 'Id': '1', 'MenuDisplayValue': 'Gegevens', 'DisplayOnRoles': '*', 'Url': ROUTE.gegevensPageRoute });
     // pages.push({ 'Id': '0', 'MenuDisplayValue': 'Komende week', 'DisplayOnRoles': '*', 'Url': ROUTE.komendeweekPageRoute });
     // pages.push({ 'Id': '0', 'MenuDisplayValue': 'Ledenlijst', 'DisplayOnRoles': PAGEROLES.ledenPageRoles.join(), 'Url': ROUTE.ledenPageRoute });
     // pages.push({ 'Id': '0', 'MenuDisplayValue': 'Ledenbeheer', 'DisplayOnRoles': PAGEROLES.ledenmanagerPageRoles.join(), 'Url': ROUTE.ledenmanagerPageRoute });
@@ -92,6 +93,7 @@ export const PAGEROLES = {
 
 export const ROUTE = {
   homePageRoute: 'home',
+  gegevensPageRoute: 'gegevens',
   // dashboardPageRoute: 'dashboard',
   // komendeweekPageRoute: 'komendeweek',
   // ledenPageRoute: 'leden',

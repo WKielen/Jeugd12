@@ -60,7 +60,6 @@ export class ResetPasswordDialogComponent extends BaseComponent implements OnIni
     user.Userid = this.userid?.value;
     user.ProposedPassword = this.password1?.value;
     user.ChangePasswordToken = this.makeRandom(30);
-    console.log('token', user.ChangePasswordToken);
     this.registerSubscription(
       this.userService.storeNewPassword$(user)
         .subscribe(data => {

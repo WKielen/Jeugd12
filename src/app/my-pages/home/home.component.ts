@@ -4,6 +4,9 @@ import { BaseComponent } from 'src/app/shared/base.component';
 import { AppError } from 'src/app/shared/error-handling/app-error';
 import * as moment from 'moment';
 import { AgendaService, IAgendaItem } from 'src/app/services/agenda.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { LedenItem, LedenService } from 'src/app/services/leden.service';
+import { ITrainingstijdItem, TrainingstijdService } from 'src/app/services/trainingstijd.service';
 
 @Component({
   selector: 'app-home',
@@ -14,11 +17,16 @@ export class HomeComponent extends BaseComponent implements OnInit {
   private nbrTabs: number = 3;
   public announcements: Array<IWebsiteText> = [];
   public agenda: Array<IAgendaItem> = [];
+  public trainingsGroups: Array<ITrainingstijdItem> = [];
+  public myGroups: Array<string> = [];
   public role: string = 'JE';
 
   constructor(
     private paramService: ParamService,
-    private agendaService: AgendaService
+    private agendaService: AgendaService,
+    private ledenService: LedenService,
+    private trainingstijdService: TrainingstijdService,
+    public authServer: AuthService,
   ) {
     super()
   }
@@ -26,9 +34,14 @@ export class HomeComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.readWebsiteTexts();
     this.readAgenda();
+    this.readLid();
+    this.readTrainingsTijden();
+    // this.lid = this.authServer.lid;
+
   }
 
-
+  lid: LedenItem = new LedenItem();
+  mycolor="#0d47a1";
   /***************************************************************************************************
   / Lees het record uit de Param tabel
   /***************************************************************************************************/
@@ -54,7 +67,6 @@ export class HomeComponent extends BaseComponent implements OnInit {
       this.agendaService.getAllFromNow$()
         .subscribe(data => {
           this.agenda = (data as Array<IAgendaItem>).filter(this.isValidAgenda('JE'));
-          console.log('agenda', this.agenda);
         },
           (error: AppError) => {
             console.log("error", error);
@@ -62,6 +74,43 @@ export class HomeComponent extends BaseComponent implements OnInit {
         )
     )
   }
+
+
+  /***************************************************************************************************
+  / Lees het record uit de Leden tabel
+  /***************************************************************************************************/
+  private readLid(): void {
+    this.registerSubscription(
+      this.ledenService.readLid$(this.authServer.LidNr)
+        .subscribe(data => {
+          this.lid = data;
+          this.authServer.lid = this.lid;
+          this.myGroups = this.lid.ExtraA?.split(',') ?? [];
+        },
+          (error: AppError) => {
+            console.log("error", error);
+          }
+        )
+    )
+  }
+
+
+  private readTrainingsTijden() {
+    this.registerSubscription(
+      this.trainingstijdService.getAll$()
+        .subscribe(
+          data => {
+            this.trainingsGroups = data as Array<ITrainingstijdItem>;
+          }
+        )
+    )
+  }
+
+
+  signoff($event: any) {
+    console.log('sign off te verzenden', $event);
+  }
+
 
 
   /***************************************************************************************************
