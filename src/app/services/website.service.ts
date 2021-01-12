@@ -77,6 +77,10 @@ export const ROLES = {
   JEUGD: 'JE',
 };
 
+
+// $response = $this->checkRoles('BS,JC,TR,AD,TE');
+
+
 export const PAGEROLES = {
   // ledenPageRoles: [ROLES.ADMIN, ROLES.BESTUUR, ROLES.JC, ROLES.TRAINER],
   // mailPageRoles: [ROLES.ADMIN, ROLES.BESTUUR, ROLES.JC],

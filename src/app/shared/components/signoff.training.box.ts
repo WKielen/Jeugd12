@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { BaseComponent } from '../base.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
-import { addSyntheticLeadingComment } from 'typescript';
 
 @Component({
   selector: 'signofftraining-box',
@@ -13,18 +12,8 @@ import { addSyntheticLeadingComment } from 'typescript';
         <div id="evenementnaam">Afzeggen training</div>
 
         <mat-chip-list multiple>
-          <mat-chip *ngFor="let chip of chips; index as i" [selected]="chip.selected" (selectionChange)="changeSelected($event)" (click)="chip.selected=!chip.selected">{{chip.name}}</mat-chip>
+          <mat-chip *ngFor="let chip of chips; index as i" [selected]="chip.selected" (click)="chip.selected=!chip.selected">{{chip.name}}</mat-chip>
         </mat-chip-list>
-
-
-        <mat-form-field style="width: 40%; ;margin-left:10px">
-          <input matInput placeholder="Kies datum waarop je niet kan" [matDatepicker]="startpicker" formControlName="startdate" required>
-          <mat-datepicker-toggle matSuffix [for]="startpicker"></mat-datepicker-toggle>
-          <mat-datepicker #startpicker touchUi="true"></mat-datepicker>
-          <mat-error *ngIf="startdate.hasError('required')">
-            Veld is verplicht
-          </mat-error>
-        </mat-form-field>
 
         <mat-form-field class="mat-form-max-width color-primary-bold" appearance="outline">
           <textarea matInput type="text" placeholder="Reden van afzegging" formControlName="reasontext"
@@ -49,59 +38,47 @@ import { addSyntheticLeadingComment } from 'typescript';
 
 export class SignoffTrainingBoxComponent extends BaseComponent implements OnInit, OnChanges {
 
-  @Input('allgroups') allgroups: Array<ITrainingstijdItem> = [];
   @Input('mygroups') mygroups: Array<string> = [];
   @Output('signoff') signoff = new EventEmitter();
 
   constructor() {
     super();
   }
+
+  // Hier vul ik een tabel met alle dagen voor de komende twee weken.
   next2weeks: any = [];
   ngOnInit() {
-
-    let todayMoment = moment();
+    const todayMoment = moment();
     for (let i = 0; i < 14; i++) {
-      let thisday = todayMoment.add(i, 'day');
-      let daynaam = moment(thisday).locale('NL-nl').format('dd DD MMM');
-      let date = moment(thisday).format('yyyy-MM-dd');
+      todayMoment.add(1, 'day');
+      console.log(todayMoment);
+      let daynaam = moment(todayMoment).locale('NL-nl').format('dd DD MMM');
+      let date = moment(todayMoment).format('yyyy-MM-dd');
       this.next2weeks.push({ name: daynaam, selected: false, datum: date });
     }
   }
 
-
+  // Hier heb je de dagen ontvangen waarop het lid traint. Nu selecteer ik alle dagen
+  // van de komende twee weken die overeen komen ze de dagen van het lid.
+  // het resultaat is dat er een chip is voor de dagen waarop het lid traint de komende 2 weken.
+  chips:any = [];
   ngOnChanges(changes: SimpleChanges) {
     if (changes.hasOwnProperty('mygroups')) {
       if (this.mygroups.length == 0) return;
-      console.log(this.next2weeks);
+
       this.next2weeks.forEach((aday:any) => {
         this.mygroups.forEach((agroup: string) => {
-          console.log(aday.name.substring(0,2), agroup.substring(0,2).toLowerCase())
           if (aday.name.substring(0,2) == agroup.substring(0,2).toLowerCase()) {
             this.chips.push(aday);
           }
         })
       })
+
     }
   }
 
-  chips = [
-    { name: 'Papadnum', selected: true },
-    { name: 'Naan', selected: false },
-    { name: 'Dal', selected: false }
-  ];
-
-  changeSelected($event: any) {
-    /* console.log('chip', $event) */
-  }
-
-
-
   afzegForm = new FormGroup({
     reasontext: new FormControl(
-      '',
-      [Validators.required]
-    ),
-    startdate: new FormControl(
       '',
       [Validators.required]
     ),
@@ -117,6 +94,11 @@ export class SignoffTrainingBoxComponent extends BaseComponent implements OnInit
   }
 
   onSubmit() {
+    this.chips.forEach((chip: any) => {
+      console.log('onSubmit', chip.selected)
+    })
+
+
     this.signoff.emit({ 'datum': FormValueToDutchDateString(this.startdate.value), 'reasontext': this.reasontext.value });
   }
 }
@@ -124,16 +106,4 @@ export class SignoffTrainingBoxComponent extends BaseComponent implements OnInit
 
 export function FormValueToDutchDateString(value: any): string {
   return moment(value).format('YYYY-MM-DD');
-}
-
-
-export interface ITrainingstijdItem {
-  Id: string;
-  Code: string;
-  Day: string;
-  StartTime: string;
-  EndTime: string;
-  Trainer: string;
-  Comment: string;
-  Color?: string;
 }

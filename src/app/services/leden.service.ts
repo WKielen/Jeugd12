@@ -20,7 +20,7 @@ export class LedenService extends DataService {
   / Read the Parameter.
   /***************************************************************************************************/
   readLid$(Id: string): Observable<LedenItem>{
-    return this.http.get(environment.baseUrl + "/lid/get?Id='" + Id + "'")
+    return this.http.get(environment.baseUrl + "/lid/get")
       .pipe(
         map(response => {
           return (response as LedenItem);
