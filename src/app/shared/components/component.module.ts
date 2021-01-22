@@ -8,6 +8,7 @@ import { AgendaPageComponent } from './agenda.page';
 import { AnnouncementPageComponent } from './announcement.page';
 import { MatDialogHeaderComponent } from './dialog.header.detail';
 import { DialogMessageBoxComponent } from './dialog.message.box';
+import { MultiChipSelectControlComponent } from './multi-chip-select-control.component';
 import { OneMemberDataBoxComponent } from './onememberdata.box';
 import { SignoffTrainingBoxComponent } from './signoff.training.box';
 import { TrainingsgroupsComponent } from './trainingsgroups';
@@ -22,6 +23,7 @@ import { TrainingsgroupsComponent } from './trainingsgroups';
     AddComponentNameComponent,
     TrainingsgroupsComponent,
     SignoffTrainingBoxComponent,
+    MultiChipSelectControlComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +40,7 @@ import { TrainingsgroupsComponent } from './trainingsgroups';
     AddComponentNameComponent,
     TrainingsgroupsComponent,
     SignoffTrainingBoxComponent,
+    MultiChipSelectControlComponent,
   ]
 })
 export class SharedComponentsModule { }
