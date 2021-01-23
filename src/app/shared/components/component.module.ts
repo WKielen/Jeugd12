@@ -10,7 +10,7 @@ import { MatDialogHeaderComponent } from './dialog.header.detail';
 import { DialogMessageBoxComponent } from './dialog.message.box';
 import { MultiChipSelectControlComponent } from './multi-chip-select-control.component';
 import { OneMemberDataBoxComponent } from './onememberdata.box';
-import { SignoffTrainingBoxComponent } from './signoff.training.box';
+import { SignoffTrainingBoxComponent } from './signoff.training.box.component';
 import { TrainingsgroupsComponent } from './trainingsgroups';
 
 @NgModule({
