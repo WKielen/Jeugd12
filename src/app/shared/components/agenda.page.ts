@@ -4,12 +4,16 @@ import { BaseComponent } from '../base.component';
 @Component({
   selector: 'agenda-page',
   template: `
-    <small class="development" *ngIf="developmentMode">{{ me }}</small>
+  <small class="development" *ngIf="developmentMode">{{ me }}</small>
+  <div class="flexcontainer">
     <div *ngIf="agenda.length > 0">
-      <div class="internalcard" *ngFor="let item of agenda; index as i" id='id{{i}}'>
-        <div id="evenementnaam">{{ item.EvenementNaam }}</div>
-        <div class="internalcardcontent">
-          <table id="table">
+      <div *ngFor="let item of agenda; index as i" id='id{{i}}'>
+        <mat-card>
+          <mat-card-subtitle>
+           {{ item.EvenementNaam }}
+          </mat-card-subtitle>
+          <mat-card-content>
+          <table>
             <tr>
               <td width="25%"></td>
               <td width="75%"></td>
@@ -30,7 +34,7 @@ import { BaseComponent } from '../base.component';
               <td>DoelGroep:</td>
               <td>{{ item.DoelGroep | doelgroep}}</td>
             </tr>
-            <tr class='top' *ngIf="item.Toelichting">
+            <tr *ngIf="item.Toelichting">
               <td>Toelichting:</td>
               <td>
                 <div [innerHTML]="item.Toelichting"></div>
@@ -69,21 +73,16 @@ import { BaseComponent } from '../base.component';
               <td>{{ item.VerzamelAfspraak }}</td>
             </tr>
           </table>
-        </div>
-      </div>
-      <div *ngIf="agenda.length == 0">
-        <h1>Niets op de agenda</h1>
-      </div>
+        </mat-card-content>
+      </mat-card>
     </div>
-    `,
-  styles: [
-    `.internalcard {border: 1px solid rgba(0, 0, 0, 0.03); box-shadow: 2px 5px 5px lightgrey;
-             background: white; margin: 5px; border-radius: 5px;
-             `,
-    '.internalcardcontent { margin: 10px 10px 10px 10px;',
-    '#evenementnaam { font-size: 16px; font-weight: bolder; padding: 5px 10px 0px 15px; }',
-    '.top { text-align: left; vertical-align: top; }'
-  ],
+  </div>
+  <div *ngIf="agenda.length == 0">
+    <h1>Niets op de agenda</h1>
+  </div>
+</div>
+  `,
+  styles: [],
 })
 
 export class AgendaPageComponent extends BaseComponent {

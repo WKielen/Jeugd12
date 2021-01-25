@@ -20,7 +20,7 @@ export class ParamService extends DataService {
   / Read the Parameter.
   /***************************************************************************************************/
   readParamData$(Id: string): Observable<string>{
-    return this.http.get(environment.baseUrl + "/param/get?Id='" + Id + "'")
+    return this.http.get(environment.baseUrl + "/param/get?Id=" + Id)
       .pipe(
         map(response => {
           return atob((response as IParamItem).Value);      // atob  = decrypt

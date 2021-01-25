@@ -8,28 +8,36 @@ import { IMultiChipSelect } from './multi-chip-select-control.component';
   selector: 'signofftraining-box',
   template: `
     <small class="development" *ngIf="developmentMode">{{ me }}</small>
-    <form [formGroup]="afzegForm" novalidate>
-      <div class="internalcard flexcontainer">
-        <div id="evenementnaam">Afzeggen training</div>
+    <small class="development" *ngIf="developmentMode">{{ me }}</small>
+    <div class="flexcontainer">
+      <mat-card>
+        <mat-card-subtitle>
+          Afzeggen training
+        </mat-card-subtitle>
+        <mat-card-content>
+          <form [formGroup]="afzegForm" novalidate>
+              <mat-form-field>
+                <app-multi-chip-select-control [value]='chips' [required]='true' placeholder='Kies datum(s) ...' [formControl]="chipscontrol">
+                </app-multi-chip-select-control>
+                <mat-error *ngIf="chipscontrol.hasError('required')">
+                  Veld is verplicht
+                </mat-error>
+              </mat-form-field>
 
-        <mat-form-field>
-          <app-multi-chip-select-control [value]='chips' [required]='true' placeholder='Kies datum(s) ...' [formControl]="chipscontrol">
-          </app-multi-chip-select-control>
-          <mat-error *ngIf="chipscontrol.hasError('required')">
-            Veld is verplicht
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="mat-form-max-width color-primary-bold" appearance="outline">
-          <textarea matInput type="text" placeholder="Reden van afzegging" formControlName="reasontext"
-            [matTextareaAutosize]=true [matAutosizeMinRows]=5 required></textarea>
-            <mat-error *ngIf="reasontext.hasError('required')">
-              Veld is verplicht
-            </mat-error>
-        </mat-form-field>
-        <button color='primary' mat-raised-button [disabled]='!afzegForm.valid' (click)="onSubmit()">Verstuur</button>
-      </div>
-    </form>
+              <mat-form-field class="mat-form-max-width color-primary-bold" appearance="outline">
+                <textarea matInput type="text" placeholder="Reden van afzegging" formControlName="reasontext"
+                  [matTextareaAutosize]=true [matAutosizeMinRows]=5 required></textarea>
+                  <mat-error *ngIf="reasontext.hasError('required')">
+                    Veld is verplicht
+                  </mat-error>
+              </mat-form-field>
+          </form>
+        </mat-card-content>
+        <mat-card-actions>
+          <button color='primary' mat-raised-button [disabled]='!afzegForm.valid' (click)="onSubmit()">Verstuur</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
     `,
   styles: [
     `.internalcard {border: 1px solid rgba(0, 0, 0, 0.03); box-shadow: 2px 5px 5px lightgrey;

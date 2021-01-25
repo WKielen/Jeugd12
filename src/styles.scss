@@ -36,11 +36,10 @@ $alt-theme: mat-light-theme($alt-theme-primary, $custom-theme-accent, $custom-th
 //
 :root {
   mat-card {
-    padding: 0 0 10px 0;
+    margin: 5px;
     border-radius: 5px;
     box-shadow: 5px 10px 10px lightgrey !important;
     background: white;
-    margin-bottom: 10px;
   }
 
   mat-card-header {
@@ -57,9 +56,11 @@ $alt-theme: mat-light-theme($alt-theme-primary, $custom-theme-accent, $custom-th
     padding: 10px 10px 10px 9px;
   }
 
-  mat-card-content {
-    padding: 25px 25px 15px 25px;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+  mat-card-subtitle {
+    font-size: 16px;
+    font-weight: bolder;
+    color: black;
+    margin-bottom: 8px;
   }
 
   mat-card-actions {
@@ -101,11 +102,15 @@ $alt-theme: mat-light-theme($alt-theme-primary, $custom-theme-accent, $custom-th
 //
 @media (min-width: $desktop) {
   .flexcontainer {
+    padding-left: 20%;
+    padding-right: 20%;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
-    align-items: flex-start;
-    background-color: green;
+    flex-grow: 0;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: flex-start;  // vertical
+    // background-color: green;
   }
 }
 
@@ -126,5 +131,20 @@ $alt-theme: mat-light-theme($alt-theme-primary, $custom-theme-accent, $custom-th
   }
 }
 
+table {
+  width: 100%;
+  border-spacing: 0px;
+  tr
+  {
+    text-align: left;
+    vertical-align: top;
+    td
+    {
+      text-align: left;
+      vertical-align: top;
+      padding: 0px;
+    }
+  }
+}
 
 .development { color: lightgrey; }

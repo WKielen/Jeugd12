@@ -32,8 +32,8 @@ export class HomeComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.readWebsiteTexts();
-    // this.readAgenda();
+    this.readWebsiteTexts();
+    this.readAgenda();
     this.readLid();
     this.readTrainingsTijden();
     // this.lid = this.authServer.lid;
