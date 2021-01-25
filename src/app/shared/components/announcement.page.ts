@@ -13,7 +13,7 @@ import { BaseComponent } from '../base.component';
             {{ announcement.Header }}
             </mat-card-subtitle>
             <mat-card-content>
-              <div [innerHTML]="announcement.Text"></div>
+               <div [innerHTML]="announcement.Text"></div>
             </mat-card-content>
           </mat-card>
         </div>

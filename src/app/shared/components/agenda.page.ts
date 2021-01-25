@@ -8,7 +8,7 @@ import { BaseComponent } from '../base.component';
   <div class="flexcontainer">
     <div *ngIf="agenda.length > 0">
       <div *ngFor="let item of agenda; index as i" id='id{{i}}'>
-        <mat-card>
+        <mat-card style="width:90%!important">
           <mat-card-subtitle>
            {{ item.EvenementNaam }}
           </mat-card-subtitle>

@@ -3,14 +3,16 @@
     <mat-tab label="Agenda">
       <div class="tabwrapper">
         <div class="tab50procent">
-            <agenda-page [agenda]='agenda'></agenda-page>
+          <trainingsgroups-box [allgroups]='trainingsGroups' [mygroups]='myGroups'></trainingsgroups-box>
+          <agenda-page [agenda]='agenda'></agenda-page>
         </div>
       </div>
     </mat-tab>
     <mat-tab label="Mededelingen">
       <div class="tabwrapper">
         <div class="tab50procent">
-            <announcement-page [announcements]='announcements'></announcement-page>
+          <trainingsgroups-box [allgroups]='trainingsGroups' [mygroups]='myGroups'></trainingsgroups-box>
+          <announcement-page [announcements]='announcements'></announcement-page>
         </div>
       </div>
     </mat-tab>
@@ -24,10 +26,3 @@
     </mat-tab>
   </mat-tab-group>
 </div>
-
-<!--
-<div id="wrapper">
-  <div class="w1">
-    <p>content of the page</p>
-  </div>
-</div> -->
