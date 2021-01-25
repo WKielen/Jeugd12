@@ -8,7 +8,6 @@ import { IMultiChipSelect } from './multi-chip-select-control.component';
   selector: 'signofftraining-box',
   template: `
     <small class="development" *ngIf="developmentMode">{{ me }}</small>
-    <small class="development" *ngIf="developmentMode">{{ me }}</small>
     <div class="flexcontainer">
       <mat-card>
         <mat-card-subtitle>
@@ -69,10 +68,7 @@ export class SignoffTrainingBoxComponent extends BaseComponent implements OnInit
       let date = moment(todayMoment).format('yyyy-MM-dd');
       this.next2weeks.push({ displayName: daynaam, selected: false, id: date });
     }
-
-
-
-    this.chipscontrol.setValue([{ displayName: "daynaam", selected: false, id: "x" }] as Array<IMultiChipSelect>);
+    this.chipscontrol.setValue(this.chips);
   }
 
   // Hier heb je de dagen ontvangen waarop het lid traint. Nu selecteer ik alle dagen
@@ -90,7 +86,6 @@ export class SignoffTrainingBoxComponent extends BaseComponent implements OnInit
           }
         })
       })
-      /* this.chipscontrol.setValue(this.chips); */
     }
   }
 
