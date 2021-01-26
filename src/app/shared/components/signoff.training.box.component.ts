@@ -14,16 +14,16 @@ import { IMultiChipSelect } from './multi-chip-select-control.component';
       </mat-card-subtitle>
       <mat-card-content>
         <form [formGroup]="afzegForm" novalidate>
-            <mat-form-field>
+            <mat-form-field id="chiplist" class="mat-form-max-width">
               <app-multi-chip-select-control [value]='chips' [required]='true' placeholder='Kies datum(s) ...' [formControl]="chipscontrol">
               </app-multi-chip-select-control>
               <mat-error *ngIf="chipscontrol.hasError('required')">
                 Veld is verplicht
               </mat-error>
             </mat-form-field>
-
-            <mat-form-field class="mat-form-max-width color-primary-bold" appearance="outline">
-              <textarea matInput type="text" placeholder="Reden van afzegging" formControlName="reasontext"
+            <mat-form-field appearance="outline" class="mat-form-max-width">
+            <mat-label>Reden van afzegging</mat-label>
+              <textarea matInput type="text" formControlName="reasontext"
                 [matTextareaAutosize]=true [matAutosizeMinRows]=5 required></textarea>
                 <mat-error *ngIf="reasontext.hasError('required')">
                   Veld is verplicht
@@ -32,11 +32,14 @@ import { IMultiChipSelect } from './multi-chip-select-control.component';
         </form>
       </mat-card-content>
       <mat-card-actions>
-        <button color='primary' mat-raised-button [disabled]='!afzegForm.valid' (click)="onSubmit()">Verstuur</button>
+        <button color='primary' class="mat-form-max-width" mat-raised-button [disabled]='!afzegForm.valid' (click)="onSubmit()">Verstuur</button>
       </mat-card-actions>
     </mat-card>
-    `,
-  styles: [],
+
+`,
+  styles: [
+    '::ng-deep #chiplist .mat-form-field-underline { display: none; }'
+  ],
 })
 
 export class SignoffTrainingBoxComponent extends BaseComponent implements OnInit, OnChanges {

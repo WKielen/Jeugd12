@@ -40,6 +40,7 @@ $alt-theme: mat-light-theme($alt-theme-primary, $custom-theme-accent, $custom-th
     border-radius: 5px;
     box-shadow: 5px 10px 10px lightgrey !important;
     background: white;
+    padding: 10px;
   }
 
   mat-card-header {
@@ -53,7 +54,6 @@ $alt-theme: mat-light-theme($alt-theme-primary, $custom-theme-accent, $custom-th
     font-weight: 500;
     color: white;
     margin: 0px !important;
-    padding: 10px 10px 10px 9px;
   }
 
   mat-card-subtitle {
@@ -63,9 +63,13 @@ $alt-theme: mat-light-theme($alt-theme-primary, $custom-theme-accent, $custom-th
     margin-bottom: 8px;
   }
 
+  mat-card-content {
+    margin: 0px;
+    padding: 0px;
+  }
+
   mat-card-actions {
     margin: 0px !important;
-    padding: 0px 0px 0px 25px !important;
   }
 
   .mat-dialog-container {
@@ -111,6 +115,9 @@ $alt-theme: mat-light-theme($alt-theme-primary, $custom-theme-accent, $custom-th
     width: 100%;
     display: table-row;
   }
+  #date-chip {
+    width: 23%;
+  }
 }
 
 //
@@ -119,6 +126,9 @@ $alt-theme: mat-light-theme($alt-theme-primary, $custom-theme-accent, $custom-th
 @media (max-width: $desktop - 1px) {
   .hideonmobile {
     display: none;
+  }
+  #date-chip {
+    width: 100%;
   }
 }
 
@@ -139,3 +149,7 @@ table {
 }
 
 .development { color: lightgrey; }
+
+.mat-form-max-width {
+  width: 100%;
+}

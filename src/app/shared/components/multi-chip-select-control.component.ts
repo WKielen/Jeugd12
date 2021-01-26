@@ -44,8 +44,8 @@ this.MyChips.disable({ emitEvent: false });
 @Component({
   selector: 'app-multi-chip-select-control',
   template: `
-  <mat-chip-list #chiplist [disabled]="disabled" [placeholder]="placeholder" class="mat-chip-list-stacked" multiple>
-    <mat-chip
+  <mat-chip-list #chiplist [disabled]="disabled" [placeholder]="placeholder" multiple>
+    <mat-chip id="date-chip"
       *ngFor="let chip of value; index as i"
       [selected]="chip.selected"
       (click)="onClick(i)">
@@ -53,7 +53,9 @@ this.MyChips.disable({ emitEvent: false });
     </mat-chip>
   </mat-chip-list>
   `,
-  styles: [`mat-chip-list { outline: none; }`],
+  styles: [`mat-chip-list { outline: none }`,
+  'mat-chip { justify-content: center}',
+],
   providers: [{
     provide: MatFormFieldControl,
     useExisting: MultiChipSelectControlComponent
@@ -70,6 +72,7 @@ export class MultiChipSelectControlComponent implements OnInit, MatFormFieldCont
     }
   }
 
+  chipwidth: number = 25;
 
   /***************************************************************************************************
   / Implementatie van ControlValueAccessor
