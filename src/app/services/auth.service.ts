@@ -5,7 +5,7 @@ import { map, tap } from 'rxjs/operators';
 import { Md5 } from 'ts-md5';
 import { ROLES } from './website.service';
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { LedenItem, LedenService } from './leden.service';
 import { AppError } from '../shared/error-handling/app-error';
 import { BaseComponent } from '../shared/base.component';
@@ -21,9 +21,6 @@ export class AuthService extends BaseComponent{
     public ledenService: LedenService
   ) {
     super();
-    // if (this.isLoggedIn()) {
-    //   this.readLid();
-    // }
   }
 
   jwtHelper: JwtHelperService = new JwtHelperService();
@@ -59,6 +56,23 @@ export class AuthService extends BaseComponent{
       );
   }
 
+  /***************************************************************************************************
+  / Lees het record uit de Leden tabel
+  /***************************************************************************************************/
+  private readLid(): Subscription {
+      return this.ledenService.readLid$(this.LidNr)
+        .subscribe(data => {
+          // this.lid = data;
+          // this.myGroups = this.lid.ExtraA?.split(',') ?? [];
+        },
+          (error: AppError) => {
+            console.log("error", error);
+          }
+        )
+  }
+
+
+
   logOff() {
     localStorage.removeItem('token');
   }
@@ -70,23 +84,6 @@ export class AuthService extends BaseComponent{
     }
     return !this.jwtHelper.isTokenExpired(token);
   }
-
-  /***************************************************************************************************
-  / Lees het record uit de Leden tabel
-  /***************************************************************************************************/
-  private readLid(): void {
-    this.registerSubscription(
-      this.ledenService.readLid$(this.LidNr)
-        .subscribe(data => {
-          this.lid = data;
-        },
-          (error: AppError) => {
-            console.log("error", error);
-          }
-        )
-    )
-  }
-
 
   get userId() {
     const token:string = localStorage.getItem('token') ?? '';
@@ -149,7 +146,7 @@ export class AuthService extends BaseComponent{
     return localStorage.getItem('token');
   }
 
-  public lid: LedenItem = new LedenItem();
+  // public lid: LedenItem = new LedenItem();
 }
 
 export interface ICredentials {

@@ -2,16 +2,18 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { BaseComponent } from '../base.component';
 
 @Component({
-  selector: 'onememberdata-box',
+  selector: 'personal-data-box',
   template: `
     <small class="development" *ngIf="developmentMode">{{ me }}</small>
-      <div class="internalcard">
-      <div id="evenementnaam">Mijn gegevens</div>
-      <div class="internalcardcontent">
-        <table id="table">
+    <mat-card>
+      <mat-card-subtitle>
+        Mijn gegevens
+      </mat-card-subtitle>
+      <mat-card-content>
+      <table id="table">
           <tr>
-            <td width="25%"></td>
-            <td width="75%"></td>
+            <td width="30%"></td>
+            <td width="70%"></td>
           </tr>
           <tr *ngIf="volledigenaam">
             <td>Naam:</td>
@@ -78,8 +80,8 @@ import { BaseComponent } from '../base.component';
             <td>Niet op foto's</td>
           </tr>
         </table>
-      </div>
-    </div>
+      </mat-card-content>
+    </mat-card>
     `,
   styles: [
     `.internalcard {border: 1px solid rgba(0, 0, 0, 0.03); box-shadow: 2px 5px 5px lightgrey;
@@ -91,7 +93,7 @@ import { BaseComponent } from '../base.component';
   ],
 })
 
-export class OneMemberDataBoxComponent extends BaseComponent implements OnChanges {
+export class PersonalDataBoxComponent extends BaseComponent implements OnChanges {
 
   @Input('lid') lid: ILedenItem = {};
   public volledigenaam: string = 'x';
@@ -138,7 +140,4 @@ export interface ILedenItem {
   Ouder1_Mobiel?: string;
   Ouder1_Telefoon?: string;
   MagNietOpFoto?: string;
-
-
-
 }

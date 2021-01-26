@@ -36,8 +36,6 @@ export class HomeComponent extends BaseComponent implements OnInit {
     this.readAgenda();
     this.readLid();
     this.readTrainingsTijden();
-    // this.lid = this.authServer.lid;
-
   }
 
   lid: LedenItem = new LedenItem();
@@ -84,7 +82,6 @@ export class HomeComponent extends BaseComponent implements OnInit {
       this.ledenService.readLid$(this.authServer.LidNr)
         .subscribe(data => {
           this.lid = data;
-          this.authServer.lid = this.lid;
           this.myGroups = this.lid.ExtraA?.split(',') ?? [];
         },
           (error: AppError) => {

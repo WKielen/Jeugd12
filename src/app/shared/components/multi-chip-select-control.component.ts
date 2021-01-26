@@ -230,7 +230,7 @@ export class MultiChipSelectControlComponent implements OnInit, MatFormFieldCont
       this.stateChanges.next();
     });
     this.focusMonitor.monitor(this.input).pipe(take(1)).subscribe(() => { this.OnTouched() });
-    let sub1 = this.ngControl.control?.valueChanges.subscribe(value => this.OnChange(value));
+    this.valueChangesSubscription = this.ngControl.control?.valueChanges.subscribe(value => this.OnChange(value));
     // TODO: subscription nog killen
 
     // We komen de control binnen. Als er geen chips geselecteerd zijn dan maak ik de control
@@ -239,6 +239,7 @@ export class MultiChipSelectControlComponent implements OnInit, MatFormFieldCont
       this.ngControl.control?.setErrors({});  // we maken de control invalid
     }
   }
+  private valueChangesSubscription: any;
 
   /***************************************************************************************************
   / on Click: er is op een chip geklikt
@@ -259,7 +260,7 @@ export class MultiChipSelectControlComponent implements OnInit, MatFormFieldCont
   ngOnDestroy() {
     this.focusMonitor.stopMonitoring(this.input);
     this.stateChanges.complete();
-    // kill sub1.
+    this.valueChangesSubscription.unsubscribe();
   }
 
   /***************************************************************************************************

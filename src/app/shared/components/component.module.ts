@@ -9,7 +9,7 @@ import { AnnouncementPageComponent } from './announcement.page';
 import { MatDialogHeaderComponent } from './dialog.header.detail';
 import { DialogMessageBoxComponent } from './dialog.message.box';
 import { MultiChipSelectControlComponent } from './multi-chip-select-control.component';
-import { OneMemberDataBoxComponent } from './onememberdata.box';
+import { PersonalDataBoxComponent } from './personal.data.box';
 import { SignoffTrainingBoxComponent } from './signoff.training.box.component';
 import { TrainingsgroupsComponent } from './trainingsgroups';
 
@@ -19,7 +19,7 @@ import { TrainingsgroupsComponent } from './trainingsgroups';
     DialogMessageBoxComponent,
     AnnouncementPageComponent,
     AgendaPageComponent,
-    OneMemberDataBoxComponent,
+    PersonalDataBoxComponent,
     AddComponentNameComponent,
     TrainingsgroupsComponent,
     SignoffTrainingBoxComponent,
@@ -36,7 +36,7 @@ import { TrainingsgroupsComponent } from './trainingsgroups';
     DialogMessageBoxComponent,
     AnnouncementPageComponent,
     AgendaPageComponent,
-    OneMemberDataBoxComponent,
+    PersonalDataBoxComponent,
     AddComponentNameComponent,
     TrainingsgroupsComponent,
     SignoffTrainingBoxComponent,
