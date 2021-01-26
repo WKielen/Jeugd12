@@ -5,27 +5,25 @@ import { BaseComponent } from '../base.component';
   selector: 'trainingsgroups-box',
   template: `
     <small class="development" *ngIf="developmentMode">{{ me }}</small>
-    <div class="flexcontainer">
-      <mat-card>
-        <mat-card-subtitle>
-          Mijn trainingstijden
-        </mat-card-subtitle>
-        <mat-card-content>
-          <table>
-            <tr>
-              <td width="25%"></td>
-              <td width="30%"></td>
-              <td width="45%"></td>
-            </tr>
-            <tr *ngFor="let item of allgroups; index as i" id='id{{i}}' style="color:{{item.Color}};">
-              <td>{{ item.Day }}</td>
-              <td>{{ item.StartTime }}-{{ item.EndTime }}</td>
-              <td>({{ item.Trainer }})</td>
-            </tr>
-          </table>
-        </mat-card-content>
-      </mat-card>
-    </div>
+    <mat-card>
+      <mat-card-subtitle>
+        Mijn trainingstijden
+      </mat-card-subtitle>
+      <mat-card-content>
+        <table>
+          <tr>
+            <td width="25%"></td>
+            <td width="30%"></td>
+            <td width="45%"></td>
+          </tr>
+          <tr *ngFor="let item of allgroups; index as i" id='id{{i}}' style="color:{{item.Color}};">
+            <td>{{ item.Day }}</td>
+            <td>{{ item.StartTime }}-{{ item.EndTime }}</td>
+            <td>({{ item.Trainer }})</td>
+          </tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
 `,
   styles: [],
 })

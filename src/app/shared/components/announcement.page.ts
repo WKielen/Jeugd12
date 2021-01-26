@@ -5,22 +5,20 @@ import { BaseComponent } from '../base.component';
   selector: 'announcement-page',
   template: `
     <small class="development" *ngIf="developmentMode">{{ me }}</small>
-    <div class="flexcontainer">
-      <div *ngIf="announcements.length > 0">
-        <div *ngFor="let announcement of announcements; index as i" id='id{{i}}'>
-          <mat-card>
-            <mat-card-subtitle>
-            {{ announcement.Header }}
-            </mat-card-subtitle>
-            <mat-card-content>
-               <div [innerHTML]="announcement.Text"></div>
-            </mat-card-content>
-          </mat-card>
-        </div>
+    <div style="width:100%" *ngIf="announcements.length > 0">
+      <div *ngFor="let announcement of announcements; index as i" id='id{{i}}'>
+        <mat-card>
+          <mat-card-subtitle>
+          {{ announcement.Header }}
+          </mat-card-subtitle>
+          <mat-card-content>
+              <div [innerHTML]="announcement.Text"></div>
+          </mat-card-content>
+        </mat-card>
       </div>
-      <div *ngIf="announcements.length == 0">
-        <h1>Geen mededelingen</h1>
-      </div>
+    </div>
+    <div *ngIf="announcements.length == 0">
+      <h1>Geen mededelingen</h1>
     </div>
   `,
   styles: [],

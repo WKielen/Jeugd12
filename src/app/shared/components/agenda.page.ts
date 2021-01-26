@@ -4,11 +4,10 @@ import { BaseComponent } from '../base.component';
 @Component({
   selector: 'agenda-page',
   template: `
-  <small class="development" *ngIf="developmentMode">{{ me }}</small>
-  <div class="flexcontainer">
+    <small class="development" *ngIf="developmentMode">{{ me }}</small>
     <div *ngIf="agenda.length > 0">
       <div *ngFor="let item of agenda; index as i" id='id{{i}}'>
-        <mat-card style="width:90%!important">
+        <mat-card>
           <mat-card-subtitle>
            {{ item.EvenementNaam }}
           </mat-card-subtitle>
@@ -76,11 +75,9 @@ import { BaseComponent } from '../base.component';
         </mat-card-content>
       </mat-card>
     </div>
-  </div>
-  <div *ngIf="agenda.length == 0">
-    <h1>Niets op de agenda</h1>
-  </div>
-</div>
+    <div *ngIf="agenda.length == 0">
+      <h1>Niets op de agenda</h1>
+    </div>
   `,
   styles: [],
 })

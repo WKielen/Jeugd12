@@ -101,47 +101,23 @@ $alt-theme: mat-light-theme($alt-theme-primary, $custom-theme-accent, $custom-th
 // Flex-Contrainer: Voor GROTE schermen, hebben we een kolommen naast elkaar
 //
 @media (min-width: $desktop) {
-  .flexcontainer {
-    display: flex;
-    flex-direction: row;
-    flex-grow: 0;
-    flex-shrink: 0;
-    justify-content: center;
-    align-items: flex-start;  // vertical
-    mat-card {
-      width: 100%;
-      background-color: burlywood;
-    }
-  }
-
   // onderstaande twee classes zorgen ervoor er in beeldbeeld een kolom van 50% wordtd getoond
   .tabwrapper {
     width: 50%;
     display: table;
     margin: 0 auto;
   }
-
   .tab50procent {
     width: 100%;
     display: table-row;
-    background-color: green;
   }
-
 }
 
 //
 // Flex-Contrainer: Voor KLEINE schermen, hebben we een kolommen onder elkaar
 //
 @media (max-width: $desktop - 1px) {
-  .flexcontainer {
-    display: flex;
-    flex-direction: column !important;
-    justify-content: center;
-    background-color: blue;
-  }
-
   .hideonmobile {
-    // Hiermee kan je elementen verbergen op een mobiel
     display: none;
   }
 }
