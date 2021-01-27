@@ -7,6 +7,7 @@ import { AgendaService, IAgendaItem } from 'src/app/services/agenda.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { LedenItem, LedenService } from 'src/app/services/leden.service';
 import { ITrainingstijdItem, TrainingstijdService } from 'src/app/services/trainingstijd.service';
+import { TrainingService } from 'src/app/services/training.service';
 
 @Component({
   selector: 'app-home',
@@ -27,6 +28,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
     private ledenService: LedenService,
     private trainingstijdService: TrainingstijdService,
     public authServer: AuthService,
+    public trainingService: TrainingService,
   ) {
     super()
   }
@@ -39,7 +41,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
   }
 
   lid: LedenItem = new LedenItem();
-  mycolor="#0d47a1";
+  mycolor = "#0d47a1";
   /***************************************************************************************************
   / Lees het record uit de Param tabel
   /***************************************************************************************************/
@@ -85,12 +87,11 @@ export class HomeComponent extends BaseComponent implements OnInit {
           this.myGroups = this.lid.ExtraA?.split(',') ?? [];
         },
           (error: AppError) => {
-            console.log("error", error);
+            console.error("HomeComponent --> readLid --> error", error);
           }
         )
     )
   }
-
 
   private readTrainingsTijden() {
     this.registerSubscription(
@@ -103,9 +104,24 @@ export class HomeComponent extends BaseComponent implements OnInit {
     )
   }
 
-
   signoff($event: any) {
-    console.log('sign off te verzenden', $event);
+    $event.data.forEach((element: any) => {
+      if (element.selected) {
+        this.registerSubscription(
+          this.trainingService.signOff$(element.id)
+            .subscribe(
+              data => {
+                console.log("HomeComponent --> $event.data.forEach --> data", data);
+              }
+            )
+        )
+      }
+    });
+
+
+
+
+
   }
 
 

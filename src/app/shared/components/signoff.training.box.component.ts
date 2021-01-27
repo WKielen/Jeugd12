@@ -64,10 +64,10 @@ export class SignoffTrainingBoxComponent extends BaseComponent implements OnInit
   ngOnInit() {
     const todayMoment = moment();
     for (let i = 0; i < 14; i++) {
-      todayMoment.add(1, 'day');
       let daynaam = moment(todayMoment).locale('NL-nl').format('dd DD MMM');
-      let date = moment(todayMoment).format('yyyy-MM-dd');
+      let date = moment(todayMoment).format('yyyy-MM-DD');
       this.next2weeks.push({ displayName: daynaam, selected: false, id: date });
+      todayMoment.add(1, 'day');
     }
     this.chipscontrol.setValue(this.chips);
   }
@@ -79,7 +79,6 @@ export class SignoffTrainingBoxComponent extends BaseComponent implements OnInit
   ngOnChanges(changes: SimpleChanges) {
     if (changes.hasOwnProperty('mygroups')) {
       if (this.mygroups.length == 0) return;
-      /* console.log('we hebben mygroups', changes.mygroups.currentValue, this.mygroups) */
       this.next2weeks.forEach((aday: IMultiChipSelect) => {
         this.mygroups.forEach((agroup: string) => {
           if (aday.displayName.substring(0, 2) == agroup.substring(0, 2).toLowerCase()) {
@@ -90,8 +89,6 @@ export class SignoffTrainingBoxComponent extends BaseComponent implements OnInit
     }
   }
 
-
-
   get reasontext(): any {
     return this.afzegForm.get('reasontext');
   }
@@ -101,16 +98,6 @@ export class SignoffTrainingBoxComponent extends BaseComponent implements OnInit
   }
 
   onSubmit() {
-    this.chips.forEach((chip: any) => {
-      console.log('onSubmit', chip.selected)
-    })
-
-
-    this.signoff.emit({ 'datum': FormValueToDutchDateString(this.chipscontrol.value), 'reasontext': this.reasontext.value });
+    this.signoff.emit({ 'data': this.chipscontrol.value, 'reasontext': this.reasontext.value });
   }
-}
-
-
-export function FormValueToDutchDateString(value: any): string {
-  return moment(value).format('YYYY-MM-DD');
 }
