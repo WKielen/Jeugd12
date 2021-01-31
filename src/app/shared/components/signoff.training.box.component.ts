@@ -24,7 +24,7 @@ import { IMultiChipSelect } from './multi-chip-select-control.component';
             <mat-form-field appearance="outline" class="mat-form-max-width">
             <mat-label>Reden van afzegging</mat-label>
               <textarea matInput type="text" formControlName="reasontext"
-                [matTextareaAutosize]=true [matAutosizeMinRows]=5 required></textarea>
+                [matTextareaAutosize]=true [matAutosizeMinRows]=2 required></textarea>
                 <mat-error *ngIf="reasontext.hasError('required')">
                   Veld is verplicht
                 </mat-error>
@@ -66,7 +66,7 @@ export class SignoffTrainingBoxComponent extends BaseComponent implements OnInit
     for (let i = 0; i < 14; i++) {
       todayMoment.add(1, 'day');
       let daynaam = moment(todayMoment).locale('NL-nl').format('dd DD MMM');
-      let date = moment(todayMoment).format('yyyy-MM-dd');
+      let date = moment(todayMoment).format('yyyy-MM-DD');
       this.next2weeks.push({ displayName: daynaam, selected: false, id: date });
     }
     this.chipscontrol.setValue(this.chips);
@@ -100,13 +100,14 @@ export class SignoffTrainingBoxComponent extends BaseComponent implements OnInit
     return this.afzegForm.get('chipscontrol');
   }
 
-  onSubmit() {
-    this.chips.forEach((chip: any) => {
-      console.log('onSubmit', chip.selected)
+  onSubmit(): void {
+    let dateList: Array<string> = [];
+    this.chips.forEach((chip: IMultiChipSelect) => {
+      if (chip.selected) {
+        dateList.push(chip.id);
+      }
     })
-
-
-    this.signoff.emit({ 'datum': FormValueToDutchDateString(this.chipscontrol.value), 'reasontext': this.reasontext.value });
+    this.signoff.emit({ 'dates': dateList, 'reasontext': this.reasontext.value });
   }
 }
 

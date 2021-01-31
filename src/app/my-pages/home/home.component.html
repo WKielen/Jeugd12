@@ -13,7 +13,7 @@
     <mat-tab label="Training">
       <div class="tabwrapper">
         <trainingsgroups-box [allgroups]='trainingsGroups' [mygroups]='myGroups'></trainingsgroups-box>
-        <signofftraining-box [mygroups]='myGroups' (signoff)="signoff($event)"></signofftraining-box>
+        <signofftraining-box [mygroups]='myGroups' (signoff)="onClick($event)"></signofftraining-box>
       </div>
     </mat-tab>
   </mat-tab-group>
