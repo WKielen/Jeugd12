@@ -2,24 +2,18 @@
   <mat-tab-group mat-stretch-tabs [(selectedIndex)]="selectedTab" class="stretched-tabs">
     <mat-tab label="Agenda">
       <div class="tabwrapper">
-        <div class="tab50procent">
-          <agenda-page [agenda]='agenda'></agenda-page>
-        </div>
+        <agenda-page [agenda]='agenda'></agenda-page>
       </div>
     </mat-tab>
     <mat-tab label="Mededelingen">
       <div class="tabwrapper">
-        <div class="tab50procent">
-          <announcement-page [announcements]='announcements'></announcement-page>
-        </div>
+        <announcement-page [announcements]='announcements'></announcement-page>
       </div>
     </mat-tab>
     <mat-tab label="Training">
       <div class="tabwrapper">
-        <div class="tab50procent">
-            <trainingsgroups-box [allgroups]='trainingsGroups' [mygroups]='myGroups'></trainingsgroups-box>
-            <signofftraining-box [mygroups]='myGroups' (signoff)="signoff($event)"></signofftraining-box>
-        </div>
+        <trainingsgroups-box [allgroups]='trainingsGroups' [mygroups]='myGroups'></trainingsgroups-box>
+        <signofftraining-box [mygroups]='myGroups' (signoff)="signoff($event)"></signofftraining-box>
       </div>
     </mat-tab>
   </mat-tab-group>
