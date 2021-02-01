@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Md5 } from 'ts-md5';
 import { ROLES } from './website.service';
 import { environment } from 'src/environments/environment';
 import { Observable, Subscription } from 'rxjs';
-import { LedenItem, LedenService } from './leden.service';
+import { LedenService } from './leden.service';
 import { AppError } from '../shared/error-handling/app-error';
 import { BaseComponent } from '../shared/base.component';
 
@@ -46,8 +46,8 @@ export class AuthService extends BaseComponent{
             localRoles.indexOf(ROLES.JEUGD) === -1 && localRoles.indexOf(ROLES.SENIOR) === -1 && localRoles.indexOf(ROLES.ADMIN) === -1 &&
             localRoles.indexOf(ROLES.TEST) === -1 ) return false;
 
-            localStorage.removeItem('token');
-            localStorage.setItem('token', localData.Token);
+            localStorage.removeItem('ledenapptoken');
+            localStorage.setItem('ledenapptoken', localData.Token);
 
             return true;
           }
@@ -74,11 +74,11 @@ export class AuthService extends BaseComponent{
 
 
   logOff() {
-    localStorage.removeItem('token');
+    localStorage.removeItem('ledenapptoken');
   }
 
   isLoggedIn() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('ledenapptoken');
     if (!token) {
       return false;
     }
@@ -86,7 +86,7 @@ export class AuthService extends BaseComponent{
   }
 
   get userId() {
-    const token:string = localStorage.getItem('token') ?? '';
+    const token:string = localStorage.getItem('ledenapptoken') ?? '';
     if (!this.token) {
       return false;
     }
@@ -95,7 +95,7 @@ export class AuthService extends BaseComponent{
   }
 
   get LidNr() {
-    const token = localStorage.getItem('token') ?? '';
+    const token = localStorage.getItem('ledenapptoken') ?? '';
     if (!this.token) {
       return false;
     }
@@ -104,7 +104,7 @@ export class AuthService extends BaseComponent{
   }
 
   get fullName() {
-    const token:string = localStorage.getItem('token') ?? '';
+    const token:string = localStorage.getItem('ledenapptoken') ?? '';
     if (!this.token) {
       return false;
     }
@@ -119,7 +119,7 @@ export class AuthService extends BaseComponent{
   }
 
   get firstname() {
-    const token = localStorage.getItem('token') ?? '';
+    const token = localStorage.getItem('ledenapptoken') ?? '';
     if (!this.token) {
       return false;
     }
@@ -129,7 +129,7 @@ export class AuthService extends BaseComponent{
 
   // property roles
   get roles() {
-    const token = localStorage.getItem('token') ?? '';
+    const token = localStorage.getItem('ledenapptoken') ?? '';
     if (!this.token) {
       return '';
     }
@@ -143,7 +143,7 @@ export class AuthService extends BaseComponent{
 
 
   get token() {
-    return localStorage.getItem('token');
+    return localStorage.getItem('ledenapptoken');
   }
 
   // public lid: LedenItem = new LedenItem();

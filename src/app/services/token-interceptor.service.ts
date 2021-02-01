@@ -19,7 +19,7 @@ export class TokenInterceptorService implements HttpInterceptor {
       return [];
     }
 
-    let token = localStorage.getItem('token');
+    let token = localStorage.getItem('ledenapptoken');
     if (token) {
       let  jwtHelper: JwtHelperService = new JwtHelperService();
       token = jwtHelper.isTokenExpired(token) ? null : token;
