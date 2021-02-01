@@ -25,9 +25,7 @@ export class DefaultComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
   ) { }
 
-  ngOnInit() {
-    // this.setUserInfo();
-  }
+  ngOnInit() {}
 
   isHandset = false;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)

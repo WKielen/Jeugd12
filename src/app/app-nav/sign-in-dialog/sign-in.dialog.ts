@@ -1,12 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/services/auth.service';
-// import { RegisterDialogComponent } from '../register-dialog/register.dialog';
 import { BaseComponent } from 'src/app/shared/base.component';
-// import { ResetPasswordDialogComponent } from '../resetpassword-dialog/password.reset.dialog';
 import { ROUTE } from 'src/app/services/website.service';
 import { RegisterDialogComponent } from '../register-dialog/register.dialog';
 import { ResetPasswordDialogComponent } from '../resetpassword-dialog/password.reset.dialog';
@@ -22,7 +20,7 @@ import { ResetPasswordDialogComponent } from '../resetpassword-dialog/password.r
   ],
 
 })
-export class SignInDialogComponent extends BaseComponent implements OnInit {
+export class SignInDialogComponent extends BaseComponent {
 
   showPw = false;
   keepSignedIn: boolean = false;
@@ -49,11 +47,6 @@ export class SignInDialogComponent extends BaseComponent implements OnInit {
 
   ) {
     super();
-  }
-
-  ngOnInit(): void {
-    /* this.userid?.setValue('3198048');
-    this.password?.setValue('TTVN4all'); */
   }
 
   /***************************************************************************************************

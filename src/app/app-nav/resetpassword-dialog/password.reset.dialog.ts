@@ -147,7 +147,3 @@ export class ResetPasswordDialogComponent extends BaseComponent implements OnIni
     return this.registerForm.get('password2');
   }
 }
-
-
-
-

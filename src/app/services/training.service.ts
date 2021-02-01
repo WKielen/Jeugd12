@@ -15,7 +15,7 @@ export class TrainingService extends DataService {
     super(environment.baseUrl + '/training', http);
   }
 
-  signoff$(signoffrecord: SignoffRecord) {
+  signoff$(signoffrecord: ISignoffRecord) {
     return this.http.patch(this.url + '/signoff', signoffrecord)
       .pipe(
         retry(3),
@@ -29,7 +29,7 @@ export class TrainingService extends DataService {
 
 }
 
-export interface SignoffRecord {
+export interface ISignoffRecord {
   Date:string;
   Reason: string;
 }

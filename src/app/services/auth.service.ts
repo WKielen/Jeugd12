@@ -28,14 +28,9 @@ export class AuthService extends BaseComponent{
 // KeepSignIn wordt door het backend geregeld door een x tijd op te tellen bij de expdate
 
   login$(credentials: ICredentials): Observable<boolean> {
-    // return this.http.post<string>(environment.loginUrl, credentials)
     credentials.password = <string>Md5.hashStr(credentials.password);
     return this.http.post<string>(environment.loginUrl, credentials)
       .pipe(
-        // tap(
-        //   data => console.log('Received: ', data),
-        //   error => console.log('Oeps: ', error)
-        // ),
         map((response: unknown) => {
           let localData = response as IToken;
 
@@ -62,16 +57,12 @@ export class AuthService extends BaseComponent{
   private readLid(): Subscription {
       return this.ledenService.readLid$(this.LidNr)
         .subscribe(data => {
-          // this.lid = data;
-          // this.myGroups = this.lid.ExtraA?.split(',') ?? [];
         },
           (error: AppError) => {
             console.log("error", error);
           }
         )
   }
-
-
 
   logOff() {
     localStorage.removeItem('token');
@@ -141,12 +132,10 @@ export class AuthService extends BaseComponent{
     return this.roles.indexOf(role) !== -1
   }
 
-
   get token() {
     return localStorage.getItem('token');
   }
 
-  // public lid: LedenItem = new LedenItem();
 }
 
 export interface ICredentials {
