@@ -7,7 +7,10 @@ import { AgendaService, IAgendaItem } from 'src/app/services/agenda.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { LedenItem, LedenService } from 'src/app/services/leden.service';
 import { ITrainingstijdItem, TrainingstijdService } from 'src/app/services/trainingstijd.service';
-import { TrainingService } from 'src/app/services/training.service';
+import { SignoffRecord, TrainingService } from 'src/app/services/training.service';
+import { MatDialog } from '@angular/material/dialog';
+import { MessageDialogComponent } from 'src/app/shared/components/dialog.message.component';
+import { NoChangesMadeError } from 'src/app/shared/error-handling/no-changes-made-error';
 
 @Component({
   selector: 'app-home',
@@ -27,8 +30,10 @@ export class HomeComponent extends BaseComponent implements OnInit {
     private agendaService: AgendaService,
     private ledenService: LedenService,
     private trainingstijdService: TrainingstijdService,
+    private trainingsService: TrainingService,
     public authServer: AuthService,
     public trainingService: TrainingService,
+    public dialog: MatDialog,
   ) {
     super()
   }
@@ -42,6 +47,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
 
   lid: LedenItem = new LedenItem();
   mycolor = "#0d47a1";
+
   /***************************************************************************************************
   / Lees het record uit de Param tabel
   /***************************************************************************************************/
@@ -104,24 +110,37 @@ export class HomeComponent extends BaseComponent implements OnInit {
     )
   }
 
-  signoff($event: any) {
-    $event.data.forEach((element: any) => {
-      if (element.selected) {
-        this.registerSubscription(
-          this.trainingService.signOff$(element.id)
-            .subscribe(
-              data => {
-                console.log("HomeComponent --> $event.data.forEach --> data", data);
-              }
-            )
-        )
-      }
+
+
+
+  onClick($event: any) {
+    let message: string = "";
+    $event.dates.forEach((date: string) => {
+      let record: SignoffRecord = Object();
+      record.Date = date;
+      record.Reason = $event.reasontext;
+      this.trainingService.signoff$(record)
+        .subscribe(data => {
+          message += "Je bent afgemeld voor de training van " + date + ". ";
+          console.log("HomeComponent --> $event.dates.forEach --> message", message);
+          this.dialog.open(MessageDialogComponent, {
+            data: message,
+          });
+        },
+          (error: AppError) => {
+            if (error instanceof NoChangesMadeError) {
+              message += "Je was al afgemeld voor " + date + ". ";
+              console.error("HomeComponent --> $event.dates.forEach --> error", error);
+            } else {
+              message += "Er is een probleem opgetreden. Je afmelding is niet geregistreerd.";
+            }
+            console.log("HomeComponent --> $event.dates.forEach --> message", message);
+            this.dialog.open(MessageDialogComponent, {
+              data: message,
+            });
+
+          });
     });
-
-
-
-
-
   }
 
 

@@ -12,9 +12,9 @@ import { BaseComponent } from '../base.component';
       <mat-card-content>
         <table>
           <tr>
-            <td width="25%"></td>
-            <td width="30%"></td>
-            <td width="45%"></td>
+            <td width="33%"></td>
+            <td width="33%"></td>
+            <td width="33%"></td>
           </tr>
           <tr *ngFor="let item of allgroups; index as i" id='id{{i}}' style="color:{{item.Color}};">
             <td>{{ item.Day }}</td>
