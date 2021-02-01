@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, VERSION } from '@angular/core';
 import { AuthService } from './../../services/auth.service';
 import { Router } from '@angular/router';
 import { BaseComponent } from 'src/app/shared/base.component';
 import { Page, Role, ROUTE, WebsiteService } from 'src/app/services/website.service';
+import { version } from 'package.json';
 
 @Component({
   selector: 'app-sidebar',
@@ -24,6 +25,7 @@ export class SidebarComponent extends BaseComponent implements OnInit {
   public pages: Array<Page> = [];
   public pagesToShow: Array<Page> = [];
   public roles: Array<Role> = [];
+  public version: string = version + '/' + VERSION.full;
 
   constructor(
     private authService: AuthService,
@@ -67,7 +69,7 @@ export class SidebarComponent extends BaseComponent implements OnInit {
 
   logoff() {
     this.authService.logOff();
-    this.router.navigate([ROUTE.loginPageRoute]); 
+    this.router.navigate([ROUTE.loginPageRoute]);
   }
 
 }

@@ -24,7 +24,7 @@ import { IMultiChipSelect } from './multi-chip-select-control.component';
             <mat-form-field appearance="outline" class="mat-form-max-width">
             <mat-label>Reden van afzegging</mat-label>
               <textarea matInput type="text" formControlName="reasontext"
-                [matTextareaAutosize]=true [matAutosizeMinRows]=5 required></textarea>
+                [matTextareaAutosize]=true [matAutosizeMinRows]=2 required></textarea>
                 <mat-error *ngIf="reasontext.hasError('required')">
                   Veld is verplicht
                 </mat-error>
@@ -97,7 +97,16 @@ export class SignoffTrainingBoxComponent extends BaseComponent implements OnInit
     return this.afzegForm.get('chipscontrol');
   }
 
-  onSubmit() {
-    this.signoff.emit({ 'data': this.chipscontrol.value, 'reasontext': this.reasontext.value });
+  onSubmit(): void {
+    let dateList: Array<string> = [];
+    this.chips.forEach((chip: IMultiChipSelect) => {
+      if (chip.selected) {
+        dateList.push(chip.id);
+      }
+    })
+    this.signoff.emit({ 'dates': dateList, 'reasontext': this.reasontext.value });
   }
+
+
+
 }
