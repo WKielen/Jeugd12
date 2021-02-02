@@ -231,7 +231,6 @@ export class MultiChipSelectControlComponent implements OnInit, MatFormFieldCont
     });
     this.focusMonitor.monitor(this.input).pipe(take(1)).subscribe(() => { this.OnTouched() });
     this.valueChangesSubscription = this.ngControl.control?.valueChanges.subscribe(value => this.OnChange(value));
-    // TODO: subscription nog killen
 
     // We komen de control binnen. Als er geen chips geselecteerd zijn dan maak ik de control
     // invalid. De control wordt nog niet rood omdat ik het zo heb gemaakt dat Touched true moet zijn.

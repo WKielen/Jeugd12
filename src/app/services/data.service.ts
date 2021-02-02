@@ -66,21 +66,21 @@ export class DataService {
   }
 
   protected errorHandler(error: HttpErrorResponse) {
-    
+
     if (error.status === 404) {
-      return observableThrowError(new NotFoundError());
+      return observableThrowError(new NotFoundError(error));
     }
 
     if (error.status === 409) {
-      return observableThrowError(new DuplicateKeyError());
+      return observableThrowError(new DuplicateKeyError(error));
     }
 
     if (error.status === 422) {
-      return observableThrowError(new NoChangesMadeError());
+      return observableThrowError(new NoChangesMadeError(error));
     }
 
     if (error.status === 503) {
-      return observableThrowError(new ServiceUnavailableError());
+      return observableThrowError(new ServiceUnavailableError(error));
     }
 
     return observableThrowError(new AppError(error));
@@ -88,7 +88,7 @@ export class DataService {
 
 
 /***************************************************************************************************
-/ When dealing with RxJs Observables and Subscriptions, it can easily happen, that you leak some memory. 
+/ When dealing with RxJs Observables and Subscriptions, it can easily happen, that you leak some memory.
 / That is because your component is destroyed, but the function you registered inside of the observable
 / is not. That way, you not only leak memory but probably also encounter some odd behavior.
 /***************************************************************************************************/

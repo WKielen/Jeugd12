@@ -100,9 +100,7 @@ export class PersonalDataBoxComponent extends BaseComponent implements OnChanges
 
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('TODO lees changes uit');
     this.volledigenaam = this.getFullNameVtA(this.lid.Voornaam, this.lid.Tussenvoegsel, this.lid.Achternaam)
-
   }
 
   /***************************************************************************************************
@@ -116,8 +114,6 @@ export class PersonalDataBoxComponent extends BaseComponent implements OnChanges
     name += ' ' + Achternaam;
     return name ?? '';
   }
-
-
 }
 
 export interface ILedenItem {

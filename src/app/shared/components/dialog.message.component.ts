@@ -6,7 +6,9 @@ import { BaseComponent } from '../base.component';
   selector: 'dialog-message-box',
   template: `
    <h2 mat-dialog-title>Melding</h2>
-   <mat-dialog-content>{{ data }}</mat-dialog-content>
+   <mat-dialog-content>
+    <div [innerHTML]="data"></div>
+   </mat-dialog-content>
    <mat-dialog-actions>
      <button mat-button mat-dialog-close>Sluit</button>
    </mat-dialog-actions>

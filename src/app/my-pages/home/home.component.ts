@@ -9,8 +9,9 @@ import { LedenItem, LedenService } from 'src/app/services/leden.service';
 import { ITrainingstijdItem, TrainingstijdService } from 'src/app/services/trainingstijd.service';
 import { ISignoffRecord, TrainingService } from 'src/app/services/training.service';
 import { MatDialog } from '@angular/material/dialog';
+import { Observable, forkJoin, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { MessageDialogComponent } from 'src/app/shared/components/dialog.message.component';
-import { NoChangesMadeError } from 'src/app/shared/error-handling/no-changes-made-error';
 
 @Component({
   selector: 'app-home',
@@ -30,7 +31,6 @@ export class HomeComponent extends BaseComponent implements OnInit {
     private agendaService: AgendaService,
     private ledenService: LedenService,
     private trainingstijdService: TrainingstijdService,
-    private trainingsService: TrainingService,
     public authServer: AuthService,
     public trainingService: TrainingService,
     public dialog: MatDialog,
@@ -81,7 +81,6 @@ export class HomeComponent extends BaseComponent implements OnInit {
     )
   }
 
-
   /***************************************************************************************************
   / Lees het record uit de Leden tabel
   /***************************************************************************************************/
@@ -110,40 +109,37 @@ export class HomeComponent extends BaseComponent implements OnInit {
     )
   }
 
-
-
-
   onClick($event: any) {
-    let message: string = "";
-    $event.dates.forEach((date: string) => {
-      let record: ISignoffRecord = Object();
-      record.Date = date;
-      record.Reason = $event.reasontext;
-      this.trainingService.signoff$(record)
-        .subscribe(data => {
-          message += "Je bent afgemeld voor de training van " + date + ". ";
-          console.log("HomeComponent --> $event.dates.forEach --> message", message);
-          this.dialog.open(MessageDialogComponent, {
-            data: message,
-          });
-        },
-          (error: AppError) => {
-            if (error instanceof NoChangesMadeError) {
-              message += "Je was al afgemeld voor " + date + ". ";
-              console.error("HomeComponent --> $event.dates.forEach --> error", error);
-            } else {
-              message += "Er is een probleem opgetreden. Je afmelding is niet geregistreerd.";
-            }
-            console.log("HomeComponent --> $event.dates.forEach --> message", message);
-            this.dialog.open(MessageDialogComponent, {
-              data: message,
-            });
+    let observables = $event.dates.map((date: string) => this.updateDatum(date, $event.reasontext));
 
-          });
-    });
+    let source = forkJoin(observables);
+    this.registerSubscription(
+    source.subscribe(messages => {
+      this.dialog.open(MessageDialogComponent, {
+        data: messages.join('<br>'),
+      });
+    })
+    );
   }
 
+  updateDatum(date: string, reasontext: string): Observable<Object> {
+    let record: ISignoffRecord = Object();
+    record.Date = date;
+    record.Reason = reasontext;
+    return this.trainingService.signoff$(record).pipe(
 
+      map(function (value: any) {
+        return "Je bent afgemeld voor de training van " + date + ". ";;
+      }),
+
+      catchError(err => {
+        let errorNr = err.originalError.status;
+        if (errorNr == "422") {
+          return of("Je was al afgemeld voor " + date + ". ")
+        }
+        return of("Er is een probleem opgetreden. Je afmelding voor " + date + " is niet geregistreerd. ")
+      }))
+  }
 
   /***************************************************************************************************
   / Het filter om de goede agendaItems te selecteren. Dit is de techniek als je params wil meegeven

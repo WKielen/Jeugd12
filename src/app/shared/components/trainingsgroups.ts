@@ -34,7 +34,6 @@ export class TrainingsgroupsComponent extends BaseComponent implements OnChanges
   @Input('mygroups') mygroups: Array<string> = [];
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('TODO lees changes uit')
 
     this.allgroups.forEach(item => {
       let color: string = 'lightgrey';
