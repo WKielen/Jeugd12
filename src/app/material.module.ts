@@ -11,7 +11,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
    exports: [
@@ -27,6 +28,7 @@ import {MatChipsModule} from '@angular/material/chips';
     MatDividerModule,
     MatDatepickerModule,
     MatChipsModule,
+    MatTableModule,
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
 })

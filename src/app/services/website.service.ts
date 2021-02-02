@@ -13,10 +13,12 @@ export class WebsiteService extends DataService {
     super(environment.baseUrl + '/website', http);
   }
 
+
   getPages() {
     let pages: Array<Page> = [];
     pages.push({ 'Id': '0', 'MenuDisplayValue': 'Home', 'DisplayOnRoles': '*', 'Url': ROUTE.homePageRoute });
     pages.push({ 'Id': '1', 'MenuDisplayValue': 'Gegevens', 'DisplayOnRoles': '*', 'Url': ROUTE.gegevensPageRoute });
+    pages.push({ 'Id': '1', 'MenuDisplayValue': 'Ladder', 'DisplayOnRoles': 'BS,JC,TR,AD,TE,JE', 'Url': ROUTE.ladderPageRoute });
 
     return pages;
   }
@@ -47,6 +49,7 @@ export const ROLES = {
 export const ROUTE = {
   homePageRoute: 'home',
   gegevensPageRoute: 'gegevens',
+  ladderPageRoute: 'ladder',
   offlinePageRoute: 'offline',
   notAllowedPageRoute: 'notallowed',
   loginPageRoute: 'login',

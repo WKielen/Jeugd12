@@ -158,3 +158,14 @@ table {
 .mat-form-max-width {
   width: 100%;
 }
+
+.mat-table {
+  width: 100%;
+}
+// hightlighted van oneven rows
+.mat-row:nth-child(even) {
+  background-color: white;
+}
+.mat-row:nth-child(odd) {
+  background-color: #f5f5f5;
+}
