@@ -18,22 +18,12 @@ export class MailService extends DataService {
 
   constructor(
     http: HttpClient,
-    // protected paramService: ParamService,
     protected authService: AuthService,
     // De inject is om door een param door te geven aan de MailService vanuit een component
     // Dit lukt nog niet.
     @Inject('param') @Optional() public useServerSideParams: string
     ) {
     super(environment.baseUrl + '/param', http);
-    // if (authService.isLoggedIn()) {
-      // if (!useServerSideParams)
-      // this.readMailLoginData();
-    // } else {
-    //   this.mailBoxParam.UserId = '';
-    //   this.mailBoxParam.Password = '';
-    //   this.mailBoxParam.UserId = '';
-    //   this.mailBoxParam.Name = '';
-    // } 
   }
 
   /***************************************************************************************************
@@ -57,24 +47,6 @@ export class MailService extends DataService {
         catchError(this.errorHandler)
       );
   }
-
-  /***************************************************************************************************
-  / Lees de mail box credetials uit de Param tabel
-  /***************************************************************************************************/
-  // private readMailLoginData(): void {
-  //   let sub = this.paramService.readParamData$('mailboxparam' + this.authService.userId,
-  //     JSON.stringify(new MailBoxParam()),
-  //     'Om in te loggen in de mailbox')
-  //     .subscribe((data: unknown) => {
-  //       let result = data as string;
-  //       this.mailBoxParam = JSON.parse(result) as MailBoxParam;
-  //     },
-  //       (error: AppError) => {
-  //         console.log("error", error);
-  //       }
-  //     );
-  //     this.registerSubscription(sub);
-  // }
 }
 
 /***************************************************************************************************

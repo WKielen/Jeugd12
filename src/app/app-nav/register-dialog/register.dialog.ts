@@ -15,7 +15,6 @@ import { BaseComponent } from 'src/app/shared/base.component';
                 margin: 15px; border-radius: 5px;}`,
     '.internalcardcontent { margin: 10px 10px 10px 20px;'
   ],
-  /* providers: [{ provide: 'param', useValue: 'progress' }] */
 })
 
 // De provider is om door een param door te geven aan de MailService.

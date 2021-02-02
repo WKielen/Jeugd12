@@ -7,7 +7,7 @@ import { AgendaService, IAgendaItem } from 'src/app/services/agenda.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { LedenItem, LedenService } from 'src/app/services/leden.service';
 import { ITrainingstijdItem, TrainingstijdService } from 'src/app/services/trainingstijd.service';
-import { SignoffRecord, TrainingService } from 'src/app/services/training.service';
+import { ISignoffRecord, TrainingService } from 'src/app/services/training.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MessageDialogComponent } from 'src/app/shared/components/dialog.message.component';
 import { NoChangesMadeError } from 'src/app/shared/error-handling/no-changes-made-error';
@@ -116,7 +116,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
   onClick($event: any) {
     let message: string = "";
     $event.dates.forEach((date: string) => {
-      let record: SignoffRecord = Object();
+      let record: ISignoffRecord = Object();
       record.Date = date;
       record.Reason = $event.reasontext;
       this.trainingService.signoff$(record)

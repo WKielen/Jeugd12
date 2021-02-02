@@ -106,7 +106,4 @@ export class SignoffTrainingBoxComponent extends BaseComponent implements OnInit
     })
     this.signoff.emit({ 'dates': dateList, 'reasontext': this.reasontext.value });
   }
-
-
-
 }

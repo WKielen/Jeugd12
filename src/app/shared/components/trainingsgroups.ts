@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { BaseComponent } from '../base.component';
 
 @Component({
@@ -32,9 +32,6 @@ export class TrainingsgroupsComponent extends BaseComponent implements OnChanges
 
   @Input('allgroups') allgroups: Array<ITrainingstijdItem> = [];
   @Input('mygroups') mygroups: Array<string> = [];
-
-  ngOnInit() {
-  }
 
   ngOnChanges(changes: SimpleChanges) {
     console.log('TODO lees changes uit')

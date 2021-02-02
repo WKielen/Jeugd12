@@ -28,11 +28,6 @@ export class TokenInterceptorService implements HttpInterceptor {
     let tokenizedReq;
     if (token) {
       tokenizedReq = req.clone({
-        // setHeaders: {
-        //   'Authorization': 'Bearer ' + this.authService.token
-        // , 'Content-Type' : 'application/json'
-        // , 'Accept': 'application/json'
-        // }
         headers: req.headers.set('Authorization', 'Bearer ' + token)
                             .set('Content-Type', 'application/json')
                             .set('Accept', 'application/json')
