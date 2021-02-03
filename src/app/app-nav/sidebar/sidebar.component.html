@@ -4,6 +4,8 @@
 <mat-divider></mat-divider>
 <mat-nav-list>
   <a mat-list-item *ngFor="let page of pagesToShow" (click)="route(page.Url)">{{ page.MenuDisplayValue }}</a>
+  <a mat-list-item [style.display]="authService.browserPromptBtn()"  (click)="authService.addToHomeScreen()">Chrome install</a>
   <a mat-list-item (click)="logoff()">Logoff</a>
 </mat-nav-list>
+
 <small class="development bottom" style="margin-left: 30px;">Version: {{version}} </small>

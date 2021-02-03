@@ -28,7 +28,7 @@ export class SidebarComponent extends BaseComponent implements OnInit {
   public version: string = version + '/' + VERSION.full;
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private websiteService: WebsiteService,
     private router: Router,
 
