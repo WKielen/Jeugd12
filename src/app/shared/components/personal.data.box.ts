@@ -5,7 +5,7 @@ import { BaseComponent } from '../base.component';
   selector: 'personal-data-box',
   template: `
     <small class="development" *ngIf="developmentMode">{{ me }}</small>
-    <mat-card>
+    <mat-card *ngIf="lid.LidNr != 0">
       <mat-card-subtitle>
         Mijn gegevens
       </mat-card-subtitle>
@@ -96,11 +96,12 @@ import { BaseComponent } from '../base.component';
 export class PersonalDataBoxComponent extends BaseComponent implements OnChanges {
 
   @Input('lid') lid: ILedenItem = {};
-  public volledigenaam: string = 'x';
+  public volledigenaam: string = '';
+  public displayCard: boolean = false;
 
 
-  ngOnChanges(changes: SimpleChanges) {
-    this.volledigenaam = this.getFullNameVtA(this.lid.Voornaam, this.lid.Tussenvoegsel, this.lid.Achternaam)
+  ngOnChanges(changes: SimpleChanges): void {
+    this.volledigenaam = this.getFullNameVtA(this.lid.Voornaam, this.lid.Tussenvoegsel, this.lid.Achternaam);
   }
 
   /***************************************************************************************************

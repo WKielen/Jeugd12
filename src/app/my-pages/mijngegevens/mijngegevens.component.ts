@@ -14,11 +14,14 @@ export class MijnGegevensComponent extends BaseComponent implements OnInit {
   constructor(
     public authServer: AuthService,
     public ledenService: LedenService,
-    ) {  super() }
+  ) { super() }
 
   public lid: LedenItem = new LedenItem();
   ngOnInit(): void {
-    this.readLid();
+    if (this.authServer.lid)
+      this.lid = this.authServer.lid;
+    else
+      this.readLid();
   }
 
   /***************************************************************************************************

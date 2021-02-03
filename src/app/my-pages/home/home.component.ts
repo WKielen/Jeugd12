@@ -90,6 +90,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
         .subscribe(data => {
           this.lid = data;
           this.myGroups = this.lid.ExtraA?.split(',') ?? [];
+          this.authServer.lid = data;
         },
           (error: AppError) => {
             console.error("HomeComponent --> readLid --> error", error);

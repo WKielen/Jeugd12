@@ -6,7 +6,7 @@ import { Md5 } from 'ts-md5';
 import { ROLES } from './website.service';
 import { environment } from 'src/environments/environment';
 import { Observable, Subscription } from 'rxjs';
-import { LedenService } from './leden.service';
+import { LedenItem, LedenService } from './leden.service';
 import { AppError } from '../shared/error-handling/app-error';
 import { BaseComponent } from '../shared/base.component';
 
@@ -24,7 +24,7 @@ export class AuthService extends BaseComponent{
   }
 
   jwtHelper: JwtHelperService = new JwtHelperService();
-
+  public lid?: LedenItem;
 // KeepSignIn wordt door het backend geregeld door een x tijd op te tellen bij de expdate
 
   login$(credentials: ICredentials): Observable<boolean> {
@@ -54,15 +54,15 @@ export class AuthService extends BaseComponent{
   /***************************************************************************************************
   / Lees het record uit de Leden tabel
   /***************************************************************************************************/
-  private readLid(): Subscription {
-      return this.ledenService.readLid$(this.LidNr)
-        .subscribe(data => {
-        },
-          (error: AppError) => {
-            console.log("error", error);
-          }
-        )
-  }
+  // private readLid(): Subscription {
+  //     return this.ledenService.readLid$(this.LidNr)
+  //       .subscribe(data => {
+  //       },
+  //         (error: AppError) => {
+  //           console.log("error", error);
+  //         }
+  //       )
+  // }
 
   logOff() {
     localStorage.removeItem('ledenapptoken');
