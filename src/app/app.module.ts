@@ -19,6 +19,7 @@ import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPT
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { CustomPipesModule } from './services/custom.pipes';
 import { AuthService } from './services/auth.service';
+import { APP_BASE_HREF, HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { AuthService } from './services/auth.service';
     CustomPipesModule,
     BrowserModule,
     AppRoutingModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' }),
     BrowserAnimationsModule,
 
   ],
@@ -42,6 +43,14 @@ import { AuthService } from './services/auth.service';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
+    },
+    {
+      provide: APP_BASE_HREF,
+      useValue: '/'
+    },
+    {
+      provide: LocationStrategy,      // set de # hash in het path. In principe alleen voor oudere browser maar
+      useClass: HashLocationStrategy  // voor ons handig omdat ze vanuit een path werken in de wordpress omgeving
     },
     {
       provide: ErrorHandler,
