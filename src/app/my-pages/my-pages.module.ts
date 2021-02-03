@@ -8,11 +8,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { SharedComponentsModule } from '../shared/components/component.module';
 import { MijnGegevensComponent } from './mijngegevens/mijngegevens.component';
+import { LadderComponent } from './ladder/ladder.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
-    MijnGegevensComponent],
+    MijnGegevensComponent,
+    LadderComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
