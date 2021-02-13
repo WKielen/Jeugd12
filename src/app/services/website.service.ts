@@ -19,6 +19,7 @@ export class WebsiteService extends DataService {
     pages.push({ 'Id': '0', 'MenuDisplayValue': 'Home', 'DisplayOnRoles': '*', 'Url': ROUTE.homePageRoute });
     pages.push({ 'Id': '1', 'MenuDisplayValue': 'Gegevens', 'DisplayOnRoles': '*', 'Url': ROUTE.gegevensPageRoute });
     pages.push({ 'Id': '1', 'MenuDisplayValue': 'Ladder', 'DisplayOnRoles': 'BS,JC,TR,AD,TE,JE', 'Url': ROUTE.ladderPageRoute });
+    pages.push({ 'Id': '1', 'MenuDisplayValue': 'Test', 'DisplayOnRoles': 'BS,JC,TR,AD,TE,JE', 'Url': ROUTE.testPageRoute });
 
     return pages;
   }
@@ -50,6 +51,7 @@ export const ROUTE = {
   homePageRoute: 'home',
   gegevensPageRoute: 'gegevens',
   ladderPageRoute: 'ladder',
+  testPageRoute: 'test',
   offlinePageRoute: 'offline',
   notAllowedPageRoute: 'notallowed',
   loginPageRoute: 'login',

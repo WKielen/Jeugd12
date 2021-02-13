@@ -9,12 +9,14 @@ import { HomeComponent } from './home/home.component';
 import { SharedComponentsModule } from '../shared/components/component.module';
 import { MijnGegevensComponent } from './mijngegevens/mijngegevens.component';
 import { LadderComponent } from './ladder/ladder.component';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     MijnGegevensComponent,
-    LadderComponent],
+    LadderComponent,
+    TestComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,

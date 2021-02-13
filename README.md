@@ -13,6 +13,11 @@ npm install --save moment
 npm install --save @angular/localize
 
 
+login in firebase via prompt -->  'firebase login'
+npm install firebase @angular/fire
+ng add @angular/fire
+
+
 
 
 

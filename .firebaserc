@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "ttvn-app": {
+      "hosting": {
+        "Jeugd": [
+          "ttvn-app"
+        ]
+      }
+    }
+  }
+}

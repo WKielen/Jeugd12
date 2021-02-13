@@ -21,7 +21,8 @@ import { CustomPipesModule } from './services/custom.pipes';
 import { AuthService } from './services/auth.service';
 import { APP_BASE_HREF, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AngularFireModule } from '@angular/fire';
-
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +37,9 @@ import { AngularFireModule } from '@angular/fire';
     AppRoutingModule,
     ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' }),
     BrowserAnimationsModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
   ],
   providers: [
     AuthService,  // belangrijk omdat hierdoor hetzelfde object van deze service in alle componenten beschikbaar is.
