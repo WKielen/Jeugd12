@@ -1,0 +1,9 @@
+<small class="development" *ngIf="developmentMode">{{ me }}</small>
+<input
+    class="chatInput"
+    [(ngModel)]="message"
+    (keydown)="handleSubmit($event)"
+    />
+
+<button class="chatButton"
+  (click)=send()>Send</button>

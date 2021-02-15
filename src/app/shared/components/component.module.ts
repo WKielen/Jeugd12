@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomMaterialModule } from 'src/app/material.module';
 import { CustomPipesModule } from 'src/app/services/custom.pipes';
 import { AddComponentNameComponent } from './add.component.name';
 import { AgendaPageComponent } from './agenda.page';
 import { AnnouncementPageComponent } from './announcement.page';
+import { ChatFormComponent } from './chat-form/chat-form.component';
 import { MatDialogHeaderComponent } from './dialog.header.detail';
 import { DialogMessageBoxComponent } from './dialog.message.box';
 import { MessageDialogComponent } from './dialog.message.component';
@@ -28,12 +29,14 @@ import { TrainingsgroupsComponent } from './trainingsgroups';
     MultiChipSelectControlComponent,
     MessageDialogComponent,
     LadderBoxComponent,
+    ChatFormComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     CustomMaterialModule,
     CustomPipesModule,
+    FormsModule,
   ],
   exports: [
     MatDialogHeaderComponent,
@@ -47,6 +50,7 @@ import { TrainingsgroupsComponent } from './trainingsgroups';
     MultiChipSelectControlComponent,
     MessageDialogComponent,
     LadderBoxComponent,
+    ChatFormComponent,
   ]
 })
 export class SharedComponentsModule { }
