@@ -6,7 +6,7 @@ import { CustomPipesModule } from 'src/app/services/custom.pipes';
 import { AddComponentNameComponent } from './add.component.name';
 import { AgendaPageComponent } from './agenda.page';
 import { AnnouncementPageComponent } from './announcement.page';
-import { ChatFormComponent } from './chat-form/chat-form.component';
+import { ChatFormComponent } from './chat-form.component';
 import { MatDialogHeaderComponent } from './dialog.header.detail';
 import { DialogMessageBoxComponent } from './dialog.message.box';
 import { MessageDialogComponent } from './dialog.message.component';
