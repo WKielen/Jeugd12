@@ -68,5 +68,7 @@ export class TestComponent extends BaseComponent implements OnInit {
       .then(result => console.log('create room result', result))
       .catch(e => { console.log('create room error', e) })
   }
+
+
 }
 

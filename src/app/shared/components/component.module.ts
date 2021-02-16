@@ -11,6 +11,7 @@ import { MatDialogHeaderComponent } from './dialog.header.detail';
 import { DialogMessageBoxComponent } from './dialog.message.box';
 import { MessageDialogComponent } from './dialog.message.component';
 import { LadderBoxComponent } from './ladder.box.component';
+import { MessageComponent } from './message/message.component';
 import { MultiChipSelectControlComponent } from './multi-chip-select-control.component';
 import { PersonalDataBoxComponent } from './personal.data.box';
 import { SignoffTrainingBoxComponent } from './signoff.training.box.component';
@@ -30,6 +31,7 @@ import { TrainingsgroupsComponent } from './trainingsgroups';
     MessageDialogComponent,
     LadderBoxComponent,
     ChatFormComponent,
+    MessageComponent,
   ],
   imports: [
     CommonModule,
@@ -51,6 +53,7 @@ import { TrainingsgroupsComponent } from './trainingsgroups';
     MessageDialogComponent,
     LadderBoxComponent,
     ChatFormComponent,
+    MessageComponent,
   ]
 })
 export class SharedComponentsModule { }

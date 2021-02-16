@@ -35,7 +35,7 @@ export class FireBaseStoreService {
     chatmessage.message = message;
     chatmessage.userId = this.authServer.userId;
     chatmessage.userName = this.authServer.lid?.Voornaam ?? '';
-    chatmessage.timeSent = new Date;
+    chatmessage.timeSent = this.getTimeStamp();
     return chatmessage;
   }
 
@@ -47,6 +47,20 @@ export class FireBaseStoreService {
     const ref = this.firebaseStore.collection('chats').doc('jeugd');
     return ref.update({ messages: messages });
   }
+
+  getTimeStamp() {
+    const now = new Date();
+    const date = now.getUTCFullYear() + '-' +
+      ("0" + (now.getUTCMonth() + 1)).slice(-2) + '-' +
+      ("0" + now.getUTCDate()).slice(-2);
+    const time = ("0" + now.getUTCHours()).slice(-2) + ':' +
+      ("0" + now.getUTCMinutes()).slice(-2) + ':' +
+      ("0" + now.getUTCSeconds()).slice(-2);
+      ("0" + now.getUTCSeconds()).slice(-2);
+
+    return (date + ' ' + time);
+  }
+
 }
 
 export interface Chat {
@@ -59,5 +73,5 @@ export interface ChatMessage {
   userId: string;
   userName: string;
   message: string;
-  timeSent: Date;
+  timeSent: string;
 }

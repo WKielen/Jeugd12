@@ -1,3 +1,13 @@
+
+<app-chat-form class="app-chat" (chatmessage)="onMessageClick($event)"></app-chat-form>
+
+
+<div *ngFor="let message of messages; index as j" #fabs>
+  <app-message [chatMessage]='message'></app-message>
+</div>
+
+
+
 <small class="development" *ngIf="developmentMode">{{ me }}</small>
 <mat-card>
   <mat-card-header>
@@ -40,5 +50,4 @@
     <button color='primary' (click)="onCreateRoom()">Create Room</button>
   </mat-card-actions>
 </mat-card>
-<app-chat-form class="app-chat" (chatmessage)="onMessageClick($event)"></app-chat-form>
 
