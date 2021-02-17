@@ -4,6 +4,7 @@ import { DefaultComponent } from './app-nav/default/default.component';
 import { LoginComponent } from './app-nav/login/login.component';
 import { NotallowedComponent } from './app-nav/notallowed/notallowed.component';
 import { OfflineComponent } from './app-nav/offline/offline.component';
+import { ChatComponent } from './my-pages/chat/chat.component';
 import { HomeComponent } from './my-pages/home/home.component';
 import { LadderComponent } from './my-pages/ladder/ladder.component';
 import { MijnGegevensComponent } from './my-pages/mijngegevens/mijngegevens.component';
@@ -21,6 +22,7 @@ const routes: Routes = [
       { path: ROUTE.homePageRoute, component: HomeComponent, canActivate: [AuthGuard] },
       { path: ROUTE.gegevensPageRoute, component: MijnGegevensComponent, canActivate: [AuthGuard] },
       { path: ROUTE.ladderPageRoute, component: LadderComponent, canActivate: [AuthGuard] },
+      { path: ROUTE.chatPageRoute, component: ChatComponent, canActivate: [AuthGuard] },
       { path: ROUTE.testPageRoute, component: TestComponent, canActivate: [AuthGuard] },
       { path: '**', component: HomeComponent }//, canActivate: [AuthGuard] }
     ]

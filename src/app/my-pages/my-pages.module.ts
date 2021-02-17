@@ -10,13 +10,15 @@ import { SharedComponentsModule } from '../shared/components/component.module';
 import { MijnGegevensComponent } from './mijngegevens/mijngegevens.component';
 import { LadderComponent } from './ladder/ladder.component';
 import { TestComponent } from './test/test.component';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     MijnGegevensComponent,
     LadderComponent,
-    TestComponent],
+    TestComponent,
+    ChatComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,

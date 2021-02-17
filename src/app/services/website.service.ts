@@ -17,9 +17,10 @@ export class WebsiteService extends DataService {
   getPages() {
     let pages: Array<Page> = [];
     pages.push({ 'Id': '0', 'MenuDisplayValue': 'Home', 'DisplayOnRoles': '*', 'Url': ROUTE.homePageRoute });
-    pages.push({ 'Id': '1', 'MenuDisplayValue': 'Gegevens', 'DisplayOnRoles': '*', 'Url': ROUTE.gegevensPageRoute });
+    pages.push({ 'Id': '1', 'MenuDisplayValue': 'Mijn gegevens', 'DisplayOnRoles': '*', 'Url': ROUTE.gegevensPageRoute });
     pages.push({ 'Id': '1', 'MenuDisplayValue': 'Ladder', 'DisplayOnRoles': 'BS,JC,TR,AD,TE,JE', 'Url': ROUTE.ladderPageRoute });
-    pages.push({ 'Id': '1', 'MenuDisplayValue': 'Test', 'DisplayOnRoles': 'BS,JC,TR,AD,TE,JE', 'Url': ROUTE.testPageRoute });
+    pages.push({ 'Id': '1', 'MenuDisplayValue': 'Chat', 'DisplayOnRoles': 'BS,JC,TR,AD,TE,JE', 'Url': ROUTE.chatPageRoute });
+    pages.push({ 'Id': '1', 'MenuDisplayValue': 'Test', 'DisplayOnRoles': 'AD,TE', 'Url': ROUTE.testPageRoute });
 
     return pages;
   }
@@ -51,6 +52,7 @@ export const ROUTE = {
   homePageRoute: 'home',
   gegevensPageRoute: 'gegevens',
   ladderPageRoute: 'ladder',
+  chatPageRoute: 'chat',
   testPageRoute: 'test',
   offlinePageRoute: 'offline',
   notAllowedPageRoute: 'notallowed',

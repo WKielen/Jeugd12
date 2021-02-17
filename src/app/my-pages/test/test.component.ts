@@ -66,14 +66,5 @@ export class TestComponent extends BaseComponent implements OnInit {
       .catch(e => { console.log('create room error', e) })
   }
 
-  onMessageClick($event: string): void {
-    let message: ChatMessage = this.firebaseStoreService.createMessage($event);
-    this.messages.push(message);
-    this.firebaseStoreService.sendMessage$(this.messages)
-      // .then(result => console.log('create room result', result))
-      .catch(e => { console.log('send message error', e) })
-  }
-
-
 }
 
