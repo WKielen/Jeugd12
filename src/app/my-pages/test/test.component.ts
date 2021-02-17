@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import { FireBaseAuthService } from 'src/app/services/firebase.auth.service';
 import { Chat, FireBaseStoreService, ChatMessage } from 'src/app/services/firebase.store.service';
+import { LedenItem } from 'src/app/services/leden.service';
 import { BaseComponent } from 'src/app/shared/base.component';
 import { AppError } from 'src/app/shared/error-handling/app-error';
 
@@ -14,23 +16,26 @@ export class TestComponent extends BaseComponent implements OnInit {
   constructor(
     private firebaseAuthService: FireBaseAuthService,
     private firebaseStoreService: FireBaseStoreService,
+    public authService: AuthService
   ) { super() }
 
   public messages: Array<ChatMessage> = [];
 
-
   ngOnInit(): void {
+    if (!this.authService.lid)
+      this.authService.readLidintoMemory();
+
     this.registerSubscription(
       this.firebaseStoreService.getChat$()
         .subscribe((data: any) => {
           this.messages = (data as Chat).messages;
-          console.log("TestComponent --> ngOnInit --> data", data);
         },
           (error: AppError) => {
             console.log("error", error);
           }
         )
-    )
+    );
+
   }
 
   onLogin() {
@@ -42,9 +47,9 @@ export class TestComponent extends BaseComponent implements OnInit {
   email: string = '';
   password: string = '';
   onRegister() {
-    this.firebaseAuthService.register$(this.email, this.password)
-      .then(result => console.log('logon result', result))
-      .catch(e => { console.log('logon error', e) })
+      this.firebaseAuthService.register$(this.email, this.password)
+        .then(result => console.log('logon result', result))
+        .catch(e => { console.log('logon error', e) })
   }
 
   onSendMessage(): void {
@@ -65,8 +70,8 @@ export class TestComponent extends BaseComponent implements OnInit {
     let message: ChatMessage = this.firebaseStoreService.createMessage($event);
     this.messages.push(message);
     this.firebaseStoreService.sendMessage$(this.messages)
-      .then(result => console.log('create room result', result))
-      .catch(e => { console.log('create room error', e) })
+      // .then(result => console.log('create room result', result))
+      .catch(e => { console.log('send message error', e) })
   }
 
 

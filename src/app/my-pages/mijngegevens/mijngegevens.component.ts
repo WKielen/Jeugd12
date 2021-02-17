@@ -12,16 +12,27 @@ import { AppError } from 'src/app/shared/error-handling/app-error';
 export class MijnGegevensComponent extends BaseComponent implements OnInit {
 
   constructor(
-    public authServer: AuthService,
+    public authService: AuthService,
     public ledenService: LedenService,
   ) { super() }
 
   public lid: LedenItem = new LedenItem();
+
   ngOnInit(): void {
-    if (this.authServer.lid)
-      this.lid = this.authServer.lid;
-    else
-      this.readLid();
+    if (this.authService.lid) {
+      this.lid = this.authService.lid ?? new LedenItem();
+    } else {
+      this.registerSubscription(
+        this.authService.readLid$()
+        .subscribe(data => {
+          this.lid = data;
+        },
+          (error: AppError) => {
+            console.log("error", error);
+          }
+        )
+      );
+    }
   }
 
   /***************************************************************************************************
@@ -29,7 +40,7 @@ export class MijnGegevensComponent extends BaseComponent implements OnInit {
   /***************************************************************************************************/
   private readLid(): void {
     this.registerSubscription(
-      this.ledenService.readLid$(this.authServer.LidNr)
+      this.ledenService.readLid$(this.authService.LidNr)
         .subscribe(data => {
           this.lid = data;
         },

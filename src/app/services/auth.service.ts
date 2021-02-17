@@ -5,9 +5,8 @@ import { map } from 'rxjs/operators';
 import { Md5 } from 'ts-md5';
 import { ROLES } from './website.service';
 import { environment } from 'src/environments/environment';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { LedenItem, LedenService } from './leden.service';
-import { AppError } from '../shared/error-handling/app-error';
 import { BaseComponent } from '../shared/base.component';
 
 @Injectable({
@@ -17,6 +16,7 @@ import { BaseComponent } from '../shared/base.component';
 export class AuthService extends BaseComponent {
 
   constructor(
+
     private http: HttpClient,
     public ledenService: LedenService
   ) {
@@ -54,15 +54,18 @@ export class AuthService extends BaseComponent {
   /***************************************************************************************************
   / Lees het record uit de Leden tabel
   /***************************************************************************************************/
-  // private readLid(): Subscription {
-  //     return this.ledenService.readLid$(this.LidNr)
-  //       .subscribe(data => {
-  //       },
-  //         (error: AppError) => {
-  //           console.log("error", error);
-  //         }
-  //       )
-  // }
+  public readLid$(): Observable<LedenItem> {
+    return this.ledenService.readLid$(this.LidNr)
+    .pipe (
+      map(data => this.lid = data)
+    );
+  }
+
+  public readLidintoMemory(): void {
+    this.registerSubscription(
+      this.readLid$().subscribe()
+    )
+  }
 
   logOff() {
     localStorage.removeItem('ledenapptoken');
@@ -143,7 +146,7 @@ export class AuthService extends BaseComponent {
 
   promptIntercepted = false;
   isStandalone = false;
-  deferredPrompt:any;
+  deferredPrompt: any;
   userInstalled = false;
   whereIsShare = 'bottom';
 
@@ -235,7 +238,7 @@ export class AuthService extends BaseComponent {
 
     // Wait for the user to respond to the prompt
     this.deferredPrompt.userChoice
-      .then((choiceResult:any) => {
+      .then((choiceResult: any) => {
 
         if (choiceResult.outcome === 'accepted') {
           // no matter the outcome, the prompt cannot be reused ON MOBILE
@@ -263,7 +266,7 @@ export class AuthService extends BaseComponent {
 
     // Wait for the user to respond to the prompt
     this.deferredPrompt.userChoice
-      .then((choiceResult:any) => {
+      .then((choiceResult: any) => {
 
         if (choiceResult.outcome === 'accepted') {
           // no matter the outcome, the prompt cannot be reused ON MOBILE

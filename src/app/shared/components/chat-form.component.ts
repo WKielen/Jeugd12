@@ -5,15 +5,33 @@ import { BaseComponent } from '../base.component';
   selector: 'app-chat-form',
   template: `
   <small class="development" *ngIf="developmentMode">{{ me }}</small>
-  <div class="container">
-    <input  placeholder="Type je bericht" [(ngModel)]="message" (keydown)="handleSubmit($event)" autocomplete="off">
+  <div class="chatContainer">
+    <input class="chatInput" placeholder="Type je bericht" [(ngModel)]="message" (keydown)="handleSubmit($event)" autocomplete="off">
   </div>
   `,
-  styles: [
-    `.container { display: block; margin-left: 1rem; margin-right: 1rem; border: none; }`,
-    `input { width: 100%; border-radius: 1rem; background-color: #ffffff; border-width: 3px; border-color: #000000; padding: 0.5rem; }`,
-    `input:focus { background-color: #E4F1FE; outline: none; } `
-  ]
+  styles: [`
+    .chatContainer {
+      display: block;
+      margin: 1rem;
+      // margin-left: 1rem;
+      // margin-right: 1rem;
+      border: none;
+    }
+    .chatInput {
+      width: 100%;
+      border-radius: 1rem;
+      background-color: #ffffff;
+      border-width: 3px;
+      border-color: #0d47a1;
+      padding: 0.5rem;
+      border-style: solid;
+      font-size: 1.2rem;
+    }
+    .chatInput:focus {
+      background-color:#ebf1f3;
+      outline: none;
+    }
+  `]
 })
 export class ChatFormComponent extends BaseComponent {
 
@@ -23,8 +41,10 @@ export class ChatFormComponent extends BaseComponent {
   constructor() { super() }
 
   send(): void {
-    this.chatmessage.emit(this.message);
-    this.message = '';
+    if (this.message) {
+      this.chatmessage.emit(this.message);
+      this.message = '';
+    }
   }
 
   handleSubmit(event: any): void {

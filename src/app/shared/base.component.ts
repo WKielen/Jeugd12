@@ -16,6 +16,7 @@ export class BaseComponent {
   ) {
     this.me = this.constructor.name;
     this.developmentMode = !environment.production;
+    this.developmentMode = false;
 
   }
 

@@ -1,53 +1,9 @@
 
-<app-chat-form class="app-chat" (chatmessage)="onMessageClick($event)"></app-chat-form>
-
-
-<div *ngFor="let message of messages; index as j" #fabs>
-  <app-message [chatMessage]='message'></app-message>
-</div>
-
-
-
-<small class="development" *ngIf="developmentMode">{{ me }}</small>
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>
-      Login
-    </mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-  </mat-card-content>
-  <mat-card-actions>
-    <button color='primary' (click)="onLogin()">Firebase Login</button>
-  </mat-card-actions>
-</mat-card>
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>
-      Register
-    </mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <input matInput [(ngModel)]="email" placeholder="email">
-    <input matInput [(ngModel)]="password" placeholder="Wachtwoord">
-  </mat-card-content>
-  <mat-card-actions>
-    <button color='primary' (click)="onRegister()">Firebase register</button>
-  </mat-card-actions>
-</mat-card>
-
-
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>
-      Create Room
-    </mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-  </mat-card-content>
-  <mat-card-actions>
-    <button color='primary' (click)="onSendMessage()">Send Message</button>
-    <button color='primary' (click)="onCreateRoom()">Create Room</button>
-  </mat-card-actions>
-</mat-card>
+<!-- <button color='primary' (click)="onCreateRoom()">Create Room</button> -->
+<app-chatroom [chatMessages]='messages' [userid]='authService.userId' (chatmessage)='onMessageClick($event)'></app-chatroom>
+<!-- <button color='primary' (click)="onLogin()">Firebase Login</button>
+<input matInput [(ngModel)]="email" placeholder="email">
+<input matInput [(ngModel)]="password" placeholder="Wachtwoord">
+<button color='primary' (click)="onRegister()">Firebase register</button>
+<button color='primary' (click)="onSendMessage()">Send Message</button> -->
 
