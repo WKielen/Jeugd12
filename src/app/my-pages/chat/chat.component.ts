@@ -25,7 +25,7 @@ export class ChatComponent extends BaseComponent implements OnInit {
     this.registerSubscription(
       this.firebaseStoreService.getChat$()
         .subscribe((data: any) => {
-          this.messages = (data as Chat).messages;
+          this.messages = data as Array<ChatMessage>;
         },
           (error: AppError) => {
             console.log("error", error);
@@ -35,9 +35,9 @@ export class ChatComponent extends BaseComponent implements OnInit {
   }
 
   onMessageClick($event: string): void {
-    let message: ChatMessage = this.firebaseStoreService.createMessage($event);
-    this.messages.push(message);
-    this.firebaseStoreService.sendMessage$(this.messages)
+    const message: ChatMessage = this.firebaseStoreService.createMessage($event);
+    this.firebaseStoreService.addMessage$(message)
+      .then(result => console.log('message sent result: ', result))
       .catch(e => { console.log('send message error', e) })
   }
 

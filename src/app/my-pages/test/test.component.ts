@@ -47,18 +47,22 @@ export class TestComponent extends BaseComponent implements OnInit {
   email: string = '';
   password: string = '';
   onRegister() {
-      this.firebaseAuthService.register$(this.email, this.password)
-        .then(result => console.log('logon result', result))
-        .catch(e => { console.log('logon error', e) })
+    this.firebaseAuthService.register$(this.email, this.password)
+      .then(result => console.log('logon result', result))
+      .catch(e => { console.log('logon error', e) })
   }
 
   onSendMessage(): void {
     let message: ChatMessage = this.firebaseStoreService.createMessage('via sendmessage');
     this.messages.push(message);
-    this.firebaseStoreService.sendMessage$(this.messages)
+    // this.firebaseStoreService.sendMessage$(this.messages)
+    //   .then(result => console.log('create room result', result))
+    //   .catch(e => { console.log('create room error', e) })
+    this.firebaseStoreService.addMessage$(message)
       .then(result => console.log('create room result', result))
-      .catch(e => { console.log('create room error', e) })
+      .catch(e => { console.log('send message error', e) })
   }
+
 
   onCreateRoom(): void {
     this.firebaseStoreService.create$()

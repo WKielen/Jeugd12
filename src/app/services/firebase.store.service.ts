@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, DocumentData, Query } from '@angular/fire/firestore';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -13,8 +13,13 @@ export class FireBaseStoreService {
     private firebaseStore: AngularFirestore,
   ) { }
 
+  /***************************************************************************************************
+  / Letop: Veel voorbeelden op internet zijn JS. Je ziet ze dan "collection(path: 'jeugdchat')" typen
+  / Met angularfire werkt dit anders. https://github.com/angular/angularfire/blob/master/docs/firestore/querying-collections.md
+  /***************************************************************************************************/
   getChat$() {
-    return this.firebaseStore.collection('chats').doc('jeugd').valueChanges()
+    return this.firebaseStore.collection('jeugdchat', ref => ref.orderBy('timeSent', "asc").limitToLast(50)).valueChanges()
+    // return this.firebaseStore.collection('jeugdchat', ref => ref.where('message', '==', '123')).valueChanges()
   }
 
   /***************************************************************************************************
@@ -26,7 +31,7 @@ export class FireBaseStoreService {
     chat.messages = [];
     chat.createdAt = new Date;
 
-    const docRef = await this.firebaseStore.collection('chats').doc('jeugd').set(chat);
+    const docRef = await this.firebaseStore.collection('jeugdchat').doc('jeugd').set(chat);
   }
 
 
@@ -42,21 +47,20 @@ export class FireBaseStoreService {
   /***************************************************************************************************
   / Dit werkt maakt chats --> jeugd --> chat<Chat>  aan.
   /***************************************************************************************************/
-
-  async sendMessage$(messages: Array<ChatMessage>) {
-    const ref = this.firebaseStore.collection('chats').doc('jeugd');
-    return ref.update({ messages: messages });
+  addMessage$(message: ChatMessage): Promise<void> {
+    const uid = this.firebaseStore.createId();
+    return this.firebaseStore.collection('jeugdchat').doc(uid).set(message);
   }
 
   getTimeStamp() {
     const now = new Date();
-    const date = now.getUTCFullYear() + '-' +
-      ("0" + (now.getUTCMonth() + 1)).slice(-2) + '-' +
-      ("0" + now.getUTCDate()).slice(-2);
-    const time = ("0" + now.getUTCHours()).slice(-2) + ':' +
-      ("0" + now.getUTCMinutes()).slice(-2) + ':' +
-      ("0" + now.getUTCSeconds()).slice(-2);
-      ("0" + now.getUTCSeconds()).slice(-2);
+    const date = now.getFullYear() + '-' +
+      ("0" + (now.getMonth() + 1)).slice(-2) + '-' +
+      ("0" + now.getDate()).slice(-2);
+    const time = ("0" + now.getHours()).slice(-2) + ':' +
+      ("0" + now.getMinutes()).slice(-2) + ':' +
+      ("0" + now.getSeconds()).slice(-2);
+    ("0" + now.getSeconds()).slice(-2);
 
     return (date + ' ' + time);
   }
