@@ -24,7 +24,7 @@ export class AuthService extends BaseComponent {
   }
 
   jwtHelper: JwtHelperService = new JwtHelperService();
-  public lid?: LedenItem;
+  public lid: LedenItem = new LedenItem();
   // KeepSignIn wordt door het backend geregeld door een x tijd op te tellen bij de expdate
 
   login$(credentials: ICredentials): Observable<boolean> {
@@ -52,19 +52,17 @@ export class AuthService extends BaseComponent {
   }
 
   /***************************************************************************************************
-  / Lees het record uit de Leden tabel
+  / Lees het record SYNC uit de Leden tabel
   /***************************************************************************************************/
-  public readLid$(): Observable<LedenItem> {
-    return this.ledenService.readLid$(this.LidNr)
-    .pipe (
-      map(data => this.lid = data)
-    );
-  }
-
-  public readLidintoMemory(): void {
-    this.registerSubscription(
-      this.readLid$().subscribe()
-    )
+  public async getLid(): Promise<LedenItem> {
+    if (this.lid.LidNr == 0) {
+      await this.ledenService.readLid$(this.LidNr)
+      .pipe(
+        map(data => this.lid = data)
+      )
+      .toPromise();
+    }
+    return this.lid;
   }
 
   logOff() {

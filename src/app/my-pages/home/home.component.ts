@@ -31,7 +31,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
     private agendaService: AgendaService,
     private ledenService: LedenService,
     private trainingstijdService: TrainingstijdService,
-    public authServer: AuthService,
+    public authService: AuthService,
     public trainingService: TrainingService,
     public dialog: MatDialog,
   ) {
@@ -85,18 +85,25 @@ export class HomeComponent extends BaseComponent implements OnInit {
   / Lees het record uit de Leden tabel
   /***************************************************************************************************/
   private readLid(): void {
-    this.registerSubscription(
-      this.ledenService.readLid$(this.authServer.LidNr)
-        .subscribe(data => {
-          this.lid = data;
-          this.myGroups = this.lid.ExtraA?.split(',') ?? [];
-          this.authServer.lid = data;
-        },
-          (error: AppError) => {
-            console.error("HomeComponent --> readLid --> error", error);
-          }
-        )
-    )
+    this.authService.getLid()
+      .then(data => {
+        this.lid = data
+        this.myGroups = this.lid.ExtraA?.split(',') ?? [];
+      });
+
+
+    // this.registerSubscription(
+    //   this.ledenService.readLid$(this.authService.LidNr)
+    //     .subscribe(data => {
+    //       this.lid = data;
+    //       this.myGroups = this.lid.ExtraA?.split(',') ?? [];
+    //       this.authService.lid = data;
+    //     },
+    //       (error: AppError) => {
+    //         console.error("HomeComponent --> readLid --> error", error);
+    //       }
+    //     )
+    // )
   }
 
   private readTrainingsTijden() {
@@ -115,11 +122,11 @@ export class HomeComponent extends BaseComponent implements OnInit {
 
     let source = forkJoin(observables);
     this.registerSubscription(
-    source.subscribe(messages => {
-      this.dialog.open(MessageDialogComponent, {
-        data: messages.join('<br>'),
-      });
-    })
+      source.subscribe(messages => {
+        this.dialog.open(MessageDialogComponent, {
+          data: messages.join('<br>'),
+        });
+      })
     );
   }
 

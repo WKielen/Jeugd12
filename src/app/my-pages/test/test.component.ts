@@ -22,8 +22,7 @@ export class TestComponent extends BaseComponent implements OnInit {
   public messages: Array<ChatMessage> = [];
 
   ngOnInit(): void {
-    if (!this.authService.lid)
-      this.authService.readLidintoMemory();
+    this.authService.getLid().then( data => { console.log( data)});
 
     this.registerSubscription(
       this.firebaseStoreService.getChat$()

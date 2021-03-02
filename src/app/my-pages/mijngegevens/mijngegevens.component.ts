@@ -14,44 +14,14 @@ export class MijnGegevensComponent extends BaseComponent implements OnInit {
   constructor(
     public authService: AuthService,
     public ledenService: LedenService,
-  ) { super() }
+  ) { super()
+  }
 
   public lid: LedenItem = new LedenItem();
 
   ngOnInit(): void {
-    if (this.authService.lid) {
-      this.lid = this.authService.lid ?? new LedenItem();
-    } else {
-      this.registerSubscription(
-        this.authService.readLid$()
-        .subscribe(data => {
-          this.lid = data;
-        },
-          (error: AppError) => {
-            console.log("error", error);
-          }
-        )
-      );
-    }
+    this.authService.getLid().then( data => { this.lid = data});
   }
-
-  /***************************************************************************************************
-  / Lees het record uit de Leden tabel
-  /***************************************************************************************************/
-  private readLid(): void {
-    this.registerSubscription(
-      this.ledenService.readLid$(this.authService.LidNr)
-        .subscribe(data => {
-          this.lid = data;
-        },
-          (error: AppError) => {
-            console.log("error", error);
-          }
-        )
-    )
-  }
-
-
 
 
 }
