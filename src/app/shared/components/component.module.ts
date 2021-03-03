@@ -18,6 +18,8 @@ import { MultiChipSelectControlComponent } from './multi-chip-select-control.com
 import { PersonalDataBoxComponent } from './personal.data.box';
 import { SignoffTrainingBoxComponent } from './signoff.training.box.component';
 import { TrainingsgroupsComponent } from './trainingsgroups';
+import { UserItemComponent } from './user-item/user-item.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -34,8 +36,11 @@ import { TrainingsgroupsComponent } from './trainingsgroups';
     LadderBoxComponent,
     ChatFormComponent,
     MessageComponent,
-    FeedComponent,
     ChatroomComponent,
+    FeedComponent,
+    UserItemComponent,
+    UserListComponent,
+
   ],
   imports: [
     CommonModule,
@@ -60,6 +65,8 @@ import { TrainingsgroupsComponent } from './trainingsgroups';
     MessageComponent,
     FeedComponent,
     ChatroomComponent,
+    UserItemComponent,
+    UserListComponent,
   ]
 })
 export class SharedComponentsModule { }

@@ -1,23 +1,23 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AngularFireAuth } from '@angular/fire/auth'
+import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
+import firebase from 'firebase/app';
+import { from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class FireBaseAuthService {
+export class FireBaseAuthService{
 
-  constructor(
-    private http: HttpClient,
-    private firebaseAuth: AngularFireAuth,
-    ) {}
+  constructor(http: HttpClient, private firebaseAuth: AngularFireAuth) {}
 
-  async login$(userid: string, pw: string)  {
-    return this.firebaseAuth.signInWithEmailAndPassword(userid, pw);
+  login$(userid: string, pw: string) {
+    return from(this.firebaseAuth.signInWithEmailAndPassword(userid, pw));
   }
-  async register$(userid: string, pw: string) {
-    return this.firebaseAuth.createUserWithEmailAndPassword(userid, pw)
+
+  async register$(userid: string, pw: string): Promise<firebase.auth.UserCredential> {
+    return this.firebaseAuth.createUserWithEmailAndPassword(userid, pw);
   }
 
 }

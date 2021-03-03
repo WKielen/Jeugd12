@@ -1,19 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ChatService } from '../services/chat.service';
-import { User } from '../models/user.model';
+import { Component, Input } from '@angular/core';
+import { IPresence } from 'src/app/services/firebase.store.service';
 
 @Component({
   selector: 'app-user-item',
   templateUrl: './user-item.component.html',
   styleUrls: ['./user-item.component.css']
 })
-export class UserItemComponent implements OnInit {
+export class UserItemComponent  {
 
-  @Input() user: User;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
+  @Input() user: IPresence = new Object as IPresence;
 
 }

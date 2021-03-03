@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { FireBaseAuthService } from 'src/app/services/firebase.auth.service';
-import { Chat, FireBaseStoreService, ChatMessage } from 'src/app/services/firebase.store.service';
-import { LedenItem } from 'src/app/services/leden.service';
+import { FireBaseStoreService, ChatMessage } from 'src/app/services/firebase.store.service';
 import { BaseComponent } from 'src/app/shared/base.component';
 import { AppError } from 'src/app/shared/error-handling/app-error';
+
 
 @Component({
   selector: 'app-test',
@@ -22,26 +22,35 @@ export class TestComponent extends BaseComponent implements OnInit {
   public messages: Array<ChatMessage> = [];
 
   ngOnInit(): void {
-    this.authService.getLid().then( data => { console.log( data)});
+    this.authService.getLid().then(data => { console.log(data) });
 
-    this.registerSubscription(
-      this.firebaseStoreService.getChat$()
-        .subscribe((data: any) => {
-          this.messages = (data as Chat).messages;
-        },
-          (error: AppError) => {
-            console.log("error", error);
-          }
-        )
-    );
+    // this.registerSubscription(
+    //   this.firebaseStoreService.getChat$()
+    //     .subscribe((data: any) => {
+    //       this.messages = (data as Chat).messages;
+    //     },
+    //       (error: AppError) => {
+    //         console.log("error", error);
+    //       }
+    //     )
+    // );
 
   }
+  // onLogin() {
+  // this.firebaseAuthService.login$('ttvn@ttvn.nl', 'Qweryty!_01$1')
+  // }
 
   onLogin() {
-    this.firebaseAuthService.login$('wim@kielen.nl', 'xyzxyz')
-      .then(result => console.log('logon result', result))
-      .catch(e => { console.log('logon error', e) })
-
+    this.registerSubscription(
+      this.firebaseAuthService.login$(this.email, this.password)
+        .subscribe((data: any) => {
+          console.log('logon result', data);
+        },
+          (error: AppError) => {
+            console.log("login error", error);
+          }
+        )
+    )
   }
   email: string = '';
   password: string = '';
@@ -64,9 +73,9 @@ export class TestComponent extends BaseComponent implements OnInit {
 
 
   onCreateRoom(): void {
-    this.firebaseStoreService.create$()
-      .then(result => console.log('create room result', result))
-      .catch(e => { console.log('create room error', e) })
+    // this.firebaseStoreService.create$()
+    //   .then(result => console.log('create room result', result))
+    //   .catch(e => { console.log('create room error', e) })
   }
 
 }

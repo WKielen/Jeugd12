@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentData, Query } from '@angular/fire/firestore';
+import { from, Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -9,7 +10,7 @@ import { AuthService } from './auth.service';
 export class FireBaseStoreService {
 
   constructor(
-    private authServer: AuthService,
+    private authService: AuthService,
     private firebaseStore: AngularFirestore,
   ) { }
 
@@ -22,35 +23,58 @@ export class FireBaseStoreService {
     // return this.firebaseStore.collection('jeugdchat', ref => ref.where('message', '==', '123')).valueChanges()
   }
 
-  /***************************************************************************************************
-  / Dit werkt maakt chats --> jeugd --> chat<Chat>  aan.
-  /***************************************************************************************************/
-  async create$() {
-    let chat: Chat = Object();
-    chat.count = 1;
-    chat.messages = [];
-    chat.createdAt = new Date;
+  // /***************************************************************************************************
+  // / Dit werkt maakt chats --> jeugd --> chat<Chat>  aan.
+  // /***************************************************************************************************/
+  // async create$() {
+  //   let chat: Chat = Object();
+  //   chat.count = 1;
+  //   chat.messages = [];
+  //   chat.createdAt = new Date;
 
-    const docRef = await this.firebaseStore.collection('jeugdchat').doc('jeugd').set(chat);
-  }
+  //   const docRef = await this.firebaseStore.collection('jeugdchat').doc('jeugd').set(chat);
+  // }
 
 
   createMessage(message: string): ChatMessage {
     let chatmessage = new Object() as ChatMessage;
     chatmessage.message = message;
-    chatmessage.userId = this.authServer.userId;
-    chatmessage.userName = this.authServer.lid?.Voornaam ?? '';
+    chatmessage.userId = this.authService.userId;
+    chatmessage.userName = this.authService.lid?.Voornaam ?? '';
     chatmessage.timeSent = this.getTimeStamp();
     return chatmessage;
   }
+
+  createPresence(status: string): IPresence {
+    let presence = new Object() as IPresence;
+    presence.userId = this.authService.userId;
+    presence.userName = this.authService.lid?.Voornaam ?? '';
+    presence.lastlogin = this.getTimeStamp();
+    presence.status = status;
+    return presence;
+  }
+
+
 
   /***************************************************************************************************
   / Dit werkt maakt chats --> jeugd --> chat<Chat>  aan.
   /***************************************************************************************************/
   addMessage$(message: ChatMessage): Promise<void> {
-    const uid = this.firebaseStore.createId();
+    // const uid = this.firebaseStore.createId();
+    const uid = message.userId + '|' + message.timeSent
     return this.firebaseStore.collection('jeugdchat').doc(uid).set(message);
   }
+
+  registerChat$(status: string ): Observable<void> {
+    let presence = this.createPresence(status);
+    return from(this.firebaseStore.collection('chatpresence').doc(presence.userId).set(presence));
+  }
+
+  getPresence$() {
+    return this.firebaseStore.collection('chatpresence', ref => ref.orderBy('status', "desc").limitToLast(50)).valueChanges()
+    // return this.firebaseStore.collection('jeugdchat', ref => ref.where('message', '==', '123')).valueChanges()
+  }
+
 
   getTimeStamp() {
     const now = new Date();
@@ -67,12 +91,18 @@ export class FireBaseStoreService {
 
 }
 
-export interface Chat {
-  count: number;
-  createdAt: Date;
-  messages: Array<ChatMessage>;
-}
+// export interface Chat {
+//   count: number;
+//   createdAt: Date;
+//   messages: Array<ChatMessage>;
+// }
 
+export interface IPresence {
+  userId: string;
+  userName: string;
+  status: string;
+  lastlogin: string;
+}
 export interface ChatMessage {
   userId: string;
   userName: string;

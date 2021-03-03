@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef, AfterViewChecked, Input, Output, EventEmitter } from '@angular/core';
-import { ChatMessage } from 'src/app/services/firebase.store.service';
+import { ChatMessage, IPresence } from 'src/app/services/firebase.store.service';
 import { BaseComponent } from '../base.component';
 
 @Component({
@@ -7,8 +7,7 @@ import { BaseComponent } from '../base.component';
   template: `
     <div class="mainChatRoomContent">
       <div class="userListWrapper">
-        Met deze kolom moet je nog iets doen
-        <!-- <app-user-list></app-user-list> -->
+        <app-user-list [presenceList]='presenceList'></app-user-list>
       </div>
       <div class="feedColumnWrapper">
         <div #scroller class="feedWrapper">
@@ -30,6 +29,7 @@ export class ChatroomComponent extends BaseComponent implements AfterViewChecked
   @ViewChild('scroller') private feedContainer: ElementRef = new Object() as ElementRef;
 
   @Input() chatMessages: Array<ChatMessage> = [];
+  @Input() presenceList: Array<IPresence> = [];
   @Input() userid: string = new Object as string;
   @Output('chatmessage') chatmessage = new EventEmitter();
 

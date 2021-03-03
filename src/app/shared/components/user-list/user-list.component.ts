@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from '../models/user.model';
-import { ChatService } from '../services/chat.service';
+import { Component, Input } from '@angular/core';
+import { FireBaseStoreService, IPresence } from 'src/app/services/firebase.store.service';
 
 @Component({
   selector: 'app-user-list',
@@ -8,11 +7,7 @@ import { ChatService } from '../services/chat.service';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent {
-  users: User[];
+  @Input() presenceList: Array<IPresence> = [];
 
-  constructor(chat: ChatService) {
-    chat.getUsers().subscribe(users => {
-      this.users = users;
-    });
-  }
+  constructor() {}
 }
