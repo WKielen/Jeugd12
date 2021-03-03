@@ -24,8 +24,7 @@ import { BaseComponent } from '../base.component';
         </table>
       </mat-card-content>
     </mat-card>
-`,
-  styles: [],
+`
 })
 
 export class TrainingsgroupsComponent extends BaseComponent implements OnChanges {

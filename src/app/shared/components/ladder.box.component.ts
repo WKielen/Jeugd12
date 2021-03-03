@@ -33,8 +33,7 @@ import { BaseComponent } from '../base.component';
 
       </mat-card-content>
     </mat-card>
-`,
-  styles: [],
+`
 })
 
 export class LadderBoxComponent extends BaseComponent {

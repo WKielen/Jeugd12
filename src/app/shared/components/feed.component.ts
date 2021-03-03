@@ -6,7 +6,7 @@ import { BaseComponent } from '../base.component';
   selector: 'app-chat-feed',
   template: `
     <small class="development" *ngIf="developmentMode">{{ me }}</small>
-    <div class="feed" *ngFor="let message of chatMessages;">
+    <div *ngFor="let message of chatMessages;">
       <app-message [chatMessage]='message' [userid]='userid'></app-message>
     </div>
   `

@@ -11,13 +11,10 @@ import { BaseComponent } from '../base.component';
   `,
   styles: [`
     .chatContainer {
-      display: block;
-      margin: 1rem;
-      // margin-left: 1rem;
-      // margin-right: 1rem;
-      border: none;
+      margin: 1rem 3rem 1rem 1rem;
     }
     .chatInput {
+      /* display: inline; */
       width: 100%;
       border-radius: 1rem;
       background-color: #ffffff;

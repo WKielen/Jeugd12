@@ -18,8 +18,8 @@ import { MultiChipSelectControlComponent } from './multi-chip-select-control.com
 import { PersonalDataBoxComponent } from './personal.data.box';
 import { SignoffTrainingBoxComponent } from './signoff.training.box.component';
 import { TrainingsgroupsComponent } from './trainingsgroups';
-import { UserItemComponent } from './user-item/user-item.component';
-import { UserListComponent } from './user-list/user-list.component';
+import { UserItemComponent } from './user-item.component';
+import { UserListComponent } from './user-list.component';
 
 @NgModule({
   declarations: [

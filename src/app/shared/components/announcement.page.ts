@@ -20,8 +20,7 @@ import { BaseComponent } from '../base.component';
     <div *ngIf="announcements.length == 0">
       <h1>Geen mededelingen</h1>
     </div>
-  `,
-  styles: [],
+  `
 })
 
 export class AnnouncementPageComponent extends BaseComponent  {

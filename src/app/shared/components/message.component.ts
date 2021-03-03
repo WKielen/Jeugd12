@@ -33,7 +33,6 @@ import { BaseComponent } from '../base.component';
       display: inherit;
       height: auto;
       width: 70%;
-      // min-width: 400px;
       border-radius: 5px;
       align-items: stretch;
       background-color: #eee;
