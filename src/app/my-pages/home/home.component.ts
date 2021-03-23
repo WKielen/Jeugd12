@@ -12,11 +12,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { Observable, forkJoin, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { MessageDialogComponent } from 'src/app/shared/components/dialog.message.component';
+import { WordpressService } from 'src/app/services/wppost.service';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent extends BaseComponent implements OnInit {
   private nbrTabs: number = 3;
@@ -31,9 +33,11 @@ export class HomeComponent extends BaseComponent implements OnInit {
     private agendaService: AgendaService,
     private ledenService: LedenService,
     private trainingstijdService: TrainingstijdService,
+    private wordpressService: WordpressService,
     public authServer: AuthService,
     public trainingService: TrainingService,
     public dialog: MatDialog,
+    private sanitizer: DomSanitizer,
   ) {
     super()
   }
@@ -43,6 +47,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
     this.readAgenda();
     this.readLid();
     this.readTrainingsTijden();
+    this.readWordpress();
   }
 
   lid: LedenItem = new LedenItem();
@@ -109,6 +114,26 @@ export class HomeComponent extends BaseComponent implements OnInit {
         )
     )
   }
+
+  private readWordpress() {
+    this.registerSubscription(
+      this.wordpressService.getLast5$()
+        .subscribe(
+          data => {
+            let list: Array<any> = data as Array<any>;
+            list.forEach(element => {
+              let announcement: IWebsiteText = {} as IWebsiteText;
+              announcement.Header = element.post_title;
+              // De HTML variable komt uit wordpress. Er staat nogal wat rommel in. Daarom haal ik hem eerst door de sanitizer.
+              // Als je dit niet doet dan gebeurt het in de browser en krijg je een warning. Dit is netter.
+              announcement.Text = this.sanitizer.bypassSecurityTrustHtml(element.post_content) as string;
+              this.announcements.push(announcement);
+            });
+          }
+        )
+    )
+  }
+
 
   onClick($event: any) {
     let observables = $event.dates.map((date: string) => this.updateDatum(date, $event.reasontext));
