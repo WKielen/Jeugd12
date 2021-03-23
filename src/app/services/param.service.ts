@@ -46,9 +46,9 @@ export interface IParamItem {
   Description: string;
 }
 
-export interface IWebsiteText {
-  Header: string;
-  Text: string;
-  StartDate: string;
-  EndDate: string;
-}
+// export interface IWebsiteText {
+//   Header: string;
+//   Text: string;
+//   StartDate: string;
+//   EndDate: string;
+//}

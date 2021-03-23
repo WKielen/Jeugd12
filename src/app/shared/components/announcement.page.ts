@@ -8,6 +8,7 @@ import { BaseComponent } from '../base.component';
     <div style="width:100%" *ngIf="announcements.length > 0">
       <div *ngFor="let announcement of announcements; index as i" id='id{{i}}'>
         <mat-card>
+        <img *ngIf="announcement.ImageUrl" class="image" [src]="announcement.ImageUrl"/>
           <mat-card-subtitle>
           {{ announcement.Header }}
           </mat-card-subtitle>
@@ -21,7 +22,7 @@ import { BaseComponent } from '../base.component';
       <h1>Geen mededelingen</h1>
     </div>
   `,
-  styles: [],
+  styles: ['.image {width: 100%; border-radius: 5px; margin-bottom: 1rem;}'],
 })
 
 export class AnnouncementPageComponent extends BaseComponent  {
@@ -35,4 +36,5 @@ export interface IWebsiteText {
   Text: string;
   StartDate: string;
   EndDate: string;
+  ImageUrl: string;
 }

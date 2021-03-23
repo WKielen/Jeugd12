@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IWebsiteText, ParamService } from 'src/app/services/param.service';
+import { ParamService } from 'src/app/services/param.service';
 import { BaseComponent } from 'src/app/shared/base.component';
 import { AppError } from 'src/app/shared/error-handling/app-error';
 import * as moment from 'moment';
@@ -13,7 +13,8 @@ import { Observable, forkJoin, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { MessageDialogComponent } from 'src/app/shared/components/dialog.message.component';
 import { WordpressService } from 'src/app/services/wppost.service';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
+import { IWebsiteText } from 'src/app/shared/components/announcement.page';
 
 @Component({
   selector: 'app-home',
@@ -47,7 +48,6 @@ export class HomeComponent extends BaseComponent implements OnInit {
     this.readAgenda();
     this.readLid();
     this.readTrainingsTijden();
-    this.readWordpress();
   }
 
   lid: LedenItem = new LedenItem();
@@ -62,6 +62,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
         .subscribe(data => {
           let result = data as string;
           this.announcements = (JSON.parse(result) as IWebsiteText[]).filter(this.isValidAnnouncement('JE'));
+          this.readWordpress();
         },
           (error: AppError) => {
             console.log("error", error);
@@ -124,6 +125,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
             list.forEach(element => {
               let announcement: IWebsiteText = {} as IWebsiteText;
               announcement.Header = element.post_title;
+              announcement.ImageUrl = element.imageurl;
               // De HTML variable komt uit wordpress. Er staat nogal wat rommel in. Daarom haal ik hem eerst door de sanitizer.
               // Als je dit niet doet dan gebeurt het in de browser en krijg je een warning. Dit is netter.
               announcement.Text = this.sanitizer.bypassSecurityTrustHtml(element.post_content) as string;

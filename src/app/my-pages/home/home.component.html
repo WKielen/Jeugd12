@@ -1,19 +1,19 @@
 <div class="mat-content" (touchstart)="swipe($event, 'start')" (touchend)="swipe($event, 'end')">
   <mat-tab-group mat-stretch-tabs [(selectedIndex)]="selectedTab" class="stretched-tabs">
+    <mat-tab label="Nieuws">
+      <div class="tabwrapper">
+        <announcement-page [announcements]='announcements'></announcement-page>
+      </div>
+    </mat-tab>
     <mat-tab label="Agenda">
       <div class="tabwrapper">
         <agenda-page [agenda]='agenda'></agenda-page>
       </div>
     </mat-tab>
-    <mat-tab label="Mededelingen">
-      <div class="tabwrapper">
-          <announcement-page [announcements]='announcements'></announcement-page>
-      </div>
-    </mat-tab>
     <mat-tab label="Training">
       <div class="tabwrapper">
-          <trainingsgroups-box [allgroups]='trainingsGroups' [mygroups]='myGroups'></trainingsgroups-box>
-          <signofftraining-box [mygroups]='myGroups' (signoff)="onClick($event)"></signofftraining-box>
+        <trainingsgroups-box [allgroups]='trainingsGroups' [mygroups]='myGroups'></trainingsgroups-box>
+        <signofftraining-box [mygroups]='myGroups' (signoff)="onClick($event)"></signofftraining-box>
       </div>
     </mat-tab>
   </mat-tab-group>
