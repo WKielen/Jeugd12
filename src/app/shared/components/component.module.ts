@@ -21,27 +21,27 @@ import { TrainingsgroupsComponent } from './trainingsgroups';
 import { UserItemComponent } from './user-item.component';
 import { UserListComponent } from './user-list.component';
 
+const componentList = [
+  MatDialogHeaderComponent,
+  DialogMessageBoxComponent,
+  AnnouncementPageComponent,
+  AgendaPageComponent,
+  PersonalDataBoxComponent,
+  AddComponentNameComponent,
+  TrainingsgroupsComponent,
+  SignoffTrainingBoxComponent,
+  MultiChipSelectControlComponent,
+  MessageDialogComponent,
+  LadderBoxComponent,
+  ChatFormComponent,
+  MessageComponent,
+  ChatroomComponent,
+  FeedComponent,
+  UserItemComponent,
+  UserListComponent,
+]
 @NgModule({
-  declarations: [
-    MatDialogHeaderComponent,
-    DialogMessageBoxComponent,
-    AnnouncementPageComponent,
-    AgendaPageComponent,
-    PersonalDataBoxComponent,
-    AddComponentNameComponent,
-    TrainingsgroupsComponent,
-    SignoffTrainingBoxComponent,
-    MultiChipSelectControlComponent,
-    MessageDialogComponent,
-    LadderBoxComponent,
-    ChatFormComponent,
-    MessageComponent,
-    ChatroomComponent,
-    FeedComponent,
-    UserItemComponent,
-    UserListComponent,
 
-  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -49,24 +49,11 @@ import { UserListComponent } from './user-list.component';
     CustomPipesModule,
     FormsModule,
   ],
+  declarations: [
+    ...componentList
+  ],
   exports: [
-    MatDialogHeaderComponent,
-    DialogMessageBoxComponent,
-    AnnouncementPageComponent,
-    AgendaPageComponent,
-    PersonalDataBoxComponent,
-    AddComponentNameComponent,
-    TrainingsgroupsComponent,
-    SignoffTrainingBoxComponent,
-    MultiChipSelectControlComponent,
-    MessageDialogComponent,
-    LadderBoxComponent,
-    ChatFormComponent,
-    MessageComponent,
-    FeedComponent,
-    ChatroomComponent,
-    UserItemComponent,
-    UserListComponent,
+    ...componentList
   ]
 })
 export class SharedComponentsModule { }
