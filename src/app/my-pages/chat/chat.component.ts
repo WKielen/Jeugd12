@@ -25,28 +25,12 @@ export class ChatComponent extends BaseComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.startTimer();
     this.authService.getLid().then();
-    this.registerSubscription(
-      this.firebaseAuthService.login$('chat@ttvn.nl', 'Qweryty!_01$')
-        .subscribe(() => {
-          this.firebaseStoreService.registerChat$('online').subscribe();
-          this.firebaseStoreService.getChat$()
-            .subscribe((data: any) => {
-              this.messages = data as Array<ChatMessage>;
-            },
-              (error: AppError) => {
-                console.log("error", error);
-              }
-            )
-            this.firebaseStoreService.getPresence$()
-            .subscribe((data: any) => {
-              this.presenceList = data as Array<IPresence>;
-            })
-          })
-    );
+    this.loginDefaultUser();
   }
 
   onMessageClick($event: string): void {
     this.stopTimer();
+    this.firebaseStoreService.setUserStatus('online');
     this.startTimer();
 
     const message: ChatMessage = this.firebaseStoreService.createMessage($event);
@@ -56,23 +40,45 @@ export class ChatComponent extends BaseComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.firebaseStoreService.registerChat$('offline').subscribe();
+    this.firebaseStoreService.setUserStatus('offline');
     this.stopTimer();
   }
 
   subscription: Subscription = new Subscription();
   myTimer: any;
 
-  startTimer():void {
+  startTimer(): void {
     // const source = timer(6000000,6000000); //5 min
-    const source = timer(60000,60000); //5 min
+    const source = timer(60000, 60000); //5 min
     this.subscription = source.subscribe((val: number) => {
-      // console.log('val', val);
-        this.firebaseStoreService.registerChat$('offline').subscribe();
-        this.stopTimer();
+      this.firebaseStoreService.setUserStatus('offline');
+      this.stopTimer();
     })
   }
-  stopTimer(){
+  stopTimer() {
     this.subscription.unsubscribe();
   }
+
+  private loginDefaultUser(): void {
+    this.registerSubscription(
+      this.firebaseAuthService.login$('chat@ttvn.nl', 'Qweryty!_01$')
+        .subscribe(() => {
+          this.firebaseStoreService.setUserStatus('online');
+          this.firebaseStoreService.getChat$()
+            .subscribe((data: any) => {
+              this.messages = data as Array<ChatMessage>;
+            },
+              (error: AppError) => {
+                console.log("error", error);
+              }
+            )
+          this.firebaseStoreService.getPresence$()
+            .subscribe((data: any) => {
+              this.presenceList = data as Array<IPresence>;
+            })
+        })
+    );
+  }
+
+
 }

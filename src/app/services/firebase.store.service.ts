@@ -35,6 +35,9 @@ export class FireBaseStoreService {
   //   const docRef = await this.firebaseStore.collection('jeugdchat').doc('jeugd').set(chat);
   // }
 
+  setUserStatus(status: string): void {
+    this.registerChat$(status).subscribe();
+  }
 
   createMessage(message: string): ChatMessage {
     let chatmessage = new Object() as ChatMessage;
@@ -65,7 +68,7 @@ export class FireBaseStoreService {
     return this.firebaseStore.collection('jeugdchat').doc(uid).set(message);
   }
 
-  registerChat$(status: string ): Observable<void> {
+  private registerChat$(status: string ): Observable<void> {
     let presence = this.createPresence(status);
     return from(this.firebaseStore.collection('chatpresence').doc(presence.userId).set(presence));
   }
@@ -74,6 +77,7 @@ export class FireBaseStoreService {
     return this.firebaseStore.collection('chatpresence', ref => ref.orderBy('status', "desc").limitToLast(50)).valueChanges()
     // return this.firebaseStore.collection('jeugdchat', ref => ref.where('message', '==', '123')).valueChanges()
   }
+
 
 
   getTimeStamp() {
