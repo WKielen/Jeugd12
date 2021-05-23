@@ -19,10 +19,10 @@ export class WordpressService extends DataService {
     return this.http.get(this.url + '/lastfive')
     .pipe(
       retry(3),
-      tap( // Log the result or error
-        data => console.log('Received: ', data),
-        error => console.log('Oeps: ', error)
-      )
+      tap({
+        next: data => console.log('Received: ', data),
+        error: error => console.log('Oeps: ', error)
+      })
     );
   }
 

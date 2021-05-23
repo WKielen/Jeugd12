@@ -22,7 +22,7 @@ import { BaseComponent } from 'src/app/shared/base.component';
 // De provider is om door een param door te geven aan de MailService.
 // Dit lukt nog niet.
 
-export class ResetPasswordDialogComponent extends BaseComponent implements OnInit{
+export class ResetPasswordDialogComponent extends BaseComponent implements OnInit {
 
   showPw: boolean = false;
   responseText: string = '';
@@ -62,12 +62,13 @@ export class ResetPasswordDialogComponent extends BaseComponent implements OnIni
     user.ChangePasswordToken = this.makeRandom(30);
     this.registerSubscription(
       this.userService.storeNewPassword$(user)
-        .subscribe(data => {
-          this.error = false;
-          this.sendMail(user);
-          this.responseText = "Je ontvangt een mail met een link. Als je op deze link klikt dan wordt je nieuwe password geactiveerd."
-        },
-          (error: AppError) => {
+        .subscribe({
+          next: (data) => {
+            this.error = false;
+            this.sendMail(user);
+            this.responseText = "Je ontvangt een mail met een link. Als je op deze link klikt dan wordt je nieuwe password geactiveerd."
+          },
+          error: (error: AppError) => {
             this.error = true;
             if (error instanceof NoChangesMadeError) {
               this.responseText = "Je hebt dit verzoek al een keer gestuurd."
@@ -76,20 +77,22 @@ export class ResetPasswordDialogComponent extends BaseComponent implements OnIni
             } else {
               throw error;
             }
-          })
+          }
+        })
     );
   }
 
   sendMail(credentials: UserItem) {
     let sub = this.userService.readUserData$(credentials.Userid)
-      .subscribe((data: unknown) => {
-        let mailItems: Array<MailItem> = [];
-        let mailItem: MailItem = new MailItem();
-        let response = data as UserItem;
-        mailItem.To = response.Email;
-        mailItem.ToName = response.FirstName;
-        mailItem.Subject = "Reset password TTVN app";
-        mailItem.Message = 'Beste '+ mailItem.ToName + `,<br><br>
+      .subscribe({
+        next: (data) => {
+          let mailItems: Array<MailItem> = [];
+          let mailItem: MailItem = new MailItem();
+          let response = data as UserItem;
+          mailItem.To = response.Email;
+          mailItem.ToName = response.FirstName;
+          mailItem.Subject = "Reset password TTVN app";
+          mailItem.Message = 'Beste ' + mailItem.ToName + `,<br><br>
         Je hebt op de TTVN site een nieuw password aangevraagd. Klik op onderstaande link om je
         nieuwe password te activeren. Na de activatie wordt je naar de login pagina van de app
         geleidt. \nAls je geen nieuw password hebt aangevraagd, moet je deze mail negeren.<br>
@@ -98,15 +101,19 @@ export class ResetPasswordDialogComponent extends BaseComponent implements OnIni
         Met vriendelijke groet,<br>
         Webmaster TTVN`;
 
-        mailItems.push(mailItem);
-        this.mailService.mail$(mailItems).subscribe();
-      },
-        (error: AppError) => {
+          mailItems.push(mailItem);
+          this.mailService.mail$(mailItems)
+            .subscribe({
+              error: (error: AppError) => {
+                console.log("error", error);
+              }
+            })
+        },
+        error: (error: AppError) => {
           console.log("error", error);
         }
-      )
+      })
     this.registerSubscription(sub);
-
   }
 
   /***************************************************************************************************

@@ -29,13 +29,14 @@ export class LadderComponent extends BaseComponent implements OnInit {
   readLadderItem(): void {
     this.registerSubscription(
       this.paramService.readParamData$("ladderstand")
-      .subscribe(data => {
-        this.ladder = JSON.parse(data);
-      },
-        (error: AppError) => {
+      .subscribe({
+        next: (data) => {
+          this.ladder = JSON.parse(data);
+        },
+        error: (error: AppError) => {
           console.log("error", error);
         }
-      )
+      })
     );
   }
 

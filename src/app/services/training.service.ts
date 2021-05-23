@@ -19,10 +19,10 @@ export class TrainingService extends DataService {
     return this.http.patch(this.url + '/signoff', signoffrecord)
       .pipe(
         retry(3),
-        tap(
-          data => console.log('Updated: ', data),
-          error => console.log('Oeps: ', error)
-        ),
+        tap({
+          next: data => console.log('Received: ', data),
+          error: error => console.log('Oeps: ', error)
+        }),
         catchError(this.errorHandler)
       );
   }

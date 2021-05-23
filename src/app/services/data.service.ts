@@ -20,10 +20,11 @@ export class DataService {
     return this.http.get(this.url + '/GetAll')
       .pipe(
         retry(3),
-        tap( // Log the result or error
-          data => console.log('Received: ', data),
-          error => console.log('Oeps: ', error)
-        ),
+        tap({
+          next: data => console.log('Received: ', data),
+          error: error => console.log('Oeps: ', error)
+        }),
+
         catchError(this.errorHandler)
       );
   }
@@ -33,10 +34,11 @@ export class DataService {
     return this.http.patch(this.url + '/Update', resource)
       .pipe(
         retry(3),
-        tap(
-          data => console.log('Updated: ', data),
-          error => console.log('Oeps: ', error)
-        ),
+        tap({
+          next: data => console.log('Received: ', data),
+          error: error => console.log('Oeps: ', error)
+        }),
+
         catchError(this.errorHandler)
       );
   }
@@ -45,10 +47,11 @@ export class DataService {
     return this.http.post(this.url + '/Insert', resource)
       .pipe(
         retry(3),
-        tap(
-          data => console.log('Inserted: ', data),
-          error => console.log('Oeps: ', error)
-        ),
+        tap({
+          next: data => console.log('Received: ', data),
+          error: error => console.log('Oeps: ', error)
+        }),
+
         catchError(this.errorHandler)
       );
   }
@@ -57,10 +60,11 @@ export class DataService {
     return this.http.delete(this.url + '/Delete?Id=' + '"' + id + '"')
       .pipe(
         retry(3),
-        tap(
-          data => console.log('Deleted: ', data),
-          error => console.log('Oeps: ', error)
-        ),
+        tap({
+          next: data => console.log('Received: ', data),
+          error: error => console.log('Oeps: ', error)
+        }),
+
         catchError(this.errorHandler)
       );
   }
@@ -68,22 +72,22 @@ export class DataService {
   protected errorHandler(error: HttpErrorResponse) {
 
     if (error.status === 404) {
-      return observableThrowError(new NotFoundError(error));
+      return observableThrowError(() =>new NotFoundError(error));
     }
 
     if (error.status === 409) {
-      return observableThrowError(new DuplicateKeyError(error));
+      return observableThrowError(() => new DuplicateKeyError(error));
     }
 
     if (error.status === 422) {
-      return observableThrowError(new NoChangesMadeError(error));
+      return observableThrowError(() => new NoChangesMadeError(error));
     }
 
     if (error.status === 503) {
-      return observableThrowError(new ServiceUnavailableError(error));
+      return observableThrowError(() => new ServiceUnavailableError(error));
     }
 
-    return observableThrowError(new AppError(error));
+    return observableThrowError(() => new AppError(error));
   }
 
 

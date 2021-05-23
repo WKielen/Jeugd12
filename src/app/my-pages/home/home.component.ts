@@ -59,15 +59,16 @@ export class HomeComponent extends BaseComponent implements OnInit {
   private readWebsiteTexts(): void {
     this.registerSubscription(
       this.paramService.readParamData$("getinstantwebsitetext")
-        .subscribe(data => {
-          let result = data as string;
-          this.announcements = (JSON.parse(result) as IWebsiteText[]).filter(this.isValidAnnouncement('JE'));
-          this.readWordpress();
-        },
-          (error: AppError) => {
+        .subscribe({
+          next: (data) => {
+            let result = data as string;
+            this.announcements = (JSON.parse(result) as IWebsiteText[]).filter(this.isValidAnnouncement('JE'));
+            this.readWordpress();
+          },
+          error: (error: AppError) => {
             console.log("error", error);
           }
-        )
+        })
     )
   }
 
@@ -77,13 +78,14 @@ export class HomeComponent extends BaseComponent implements OnInit {
   private readAgenda(): void {
     this.registerSubscription(
       this.agendaService.getAllFromNow$()
-        .subscribe(data => {
-          this.agenda = (data as Array<IAgendaItem>).filter(this.isValidAgenda('JE'));
-        },
-          (error: AppError) => {
+        .subscribe({
+          next: (data) => {
+            this.agenda = (data as Array<IAgendaItem>).filter(this.isValidAgenda('JE'));
+          },
+          error: (error: AppError) => {
             console.log("error", error);
           }
-        )
+        })
     )
   }
 
@@ -93,34 +95,38 @@ export class HomeComponent extends BaseComponent implements OnInit {
   private readLid(): void {
     this.registerSubscription(
       this.ledenService.readLid$(this.authServer.LidNr)
-        .subscribe(data => {
-          this.lid = data;
-          this.myGroups = this.lid.ExtraA?.split(',') ?? [];
-          this.authServer.lid = data;
-        },
-          (error: AppError) => {
-            console.error("HomeComponent --> readLid --> error", error);
+        .subscribe({
+          next: (data) => {
+            this.lid = data;
+            this.myGroups = this.lid.ExtraA?.split(',') ?? [];
+            this.authServer.lid = data;
+          },
+          error: (error: AppError) => {
+            console.log("error", error);
           }
-        )
+        })
     )
   }
 
   private readTrainingsTijden() {
     this.registerSubscription(
       this.trainingstijdService.getAll$()
-        .subscribe(
-          data => {
+        .subscribe({
+          next: (data) => {
             this.trainingsGroups = data as Array<ITrainingstijdItem>;
+          },
+          error: (error: AppError) => {
+            console.log("error", error);
           }
-        )
+        })
     )
   }
 
   private readWordpress() {
     this.registerSubscription(
       this.wordpressService.getLast5$()
-        .subscribe(
-          data => {
+        .subscribe({
+          next: (data) => {
             let list: Array<any> = data as Array<any>;
             list.forEach(element => {
               let announcement: IWebsiteText = {} as IWebsiteText;
@@ -131,8 +137,11 @@ export class HomeComponent extends BaseComponent implements OnInit {
               announcement.Text = this.sanitizer.bypassSecurityTrustHtml(element.post_content) as string;
               this.announcements.push(announcement);
             });
+          },
+          error: (error: AppError) => {
+            console.log("error", error);
           }
-        )
+        })
     )
   }
 
@@ -142,11 +151,17 @@ export class HomeComponent extends BaseComponent implements OnInit {
 
     let source = forkJoin(observables);
     this.registerSubscription(
-    source.subscribe(messages => {
-      this.dialog.open(MessageDialogComponent, {
-        data: messages.join('<br>'),
-      });
-    })
+      source
+        .subscribe({
+          next: (data) => {
+            this.dialog.open(MessageDialogComponent, {
+              data: data.join('<br>'),
+            });
+          },
+          error: (error: AppError) => {
+            console.log("error", error);
+          }
+        })
     );
   }
 
