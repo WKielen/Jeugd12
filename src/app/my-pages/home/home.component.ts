@@ -154,8 +154,9 @@ export class HomeComponent extends BaseComponent implements OnInit {
       source
         .subscribe({
           next: (data) => {
+            let resultArray = data as Array<string>;
             this.dialog.open(MessageDialogComponent, {
-              data: data.join('<br>'),
+              data: resultArray.join('<br>'),
             });
           },
           error: (error: AppError) => {
