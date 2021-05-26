@@ -12,9 +12,9 @@ import { subscribeOn } from 'rxjs/operators';
   selector: 'app-register-dialog',
   templateUrl: './register.dialog.html',
   styles: ['mat-form-field {width: 100%; }',
-    `.internalcard {border: 1px solid rgba(0, 0, 0, 0.03); box-shadow: 2px 5px 5px lightgrey;
-                margin: 15px; border-radius: 5px;}`,
-    '.internalcardcontent { margin: 10px 10px 10px 20px;'
+    `.internalcard { border: 1px solid rgba(0, 0, 0, 0.03); box-shadow: 2px 5px 5px lightgrey;
+                margin: 15px; border-radius: 5px; }`,
+    '.internalcardcontent { margin: 10px 10px 10px 20px; }'
   ],
 })
 
