@@ -3,8 +3,10 @@ import { AuthService } from './../../services/auth.service';
 import { Router } from '@angular/router';
 import { BaseComponent } from 'src/app/shared/base.component';
 import { Page, Role, ROUTE, WebsiteService } from 'src/app/services/website.service';
-import { version } from 'package.json';
 
+// Een stukje JS voor het ophalen van de applicatie versie uit package.json
+declare var require: any;
+const { version: appVersion } = require('../../../../package.json');
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -25,7 +27,7 @@ export class SidebarComponent extends BaseComponent implements OnInit {
   public pages: Array<Page> = [];
   public pagesToShow: Array<Page> = [];
   public roles: Array<Role> = [];
-  public version: string = version + '/' + VERSION.full;
+  public version: string = appVersion +  '/' + VERSION.full;
 
   constructor(
     public authService: AuthService,

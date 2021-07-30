@@ -54,8 +54,8 @@ this.MyChips.disable({ emitEvent: false });
   </mat-chip-list>
   `,
   styles: [`mat-chip-list { outline: none }`,
-  'mat-chip { justify-content: center}',
-],
+    'mat-chip { justify-content: center}',
+  ],
   providers: [{
     provide: MatFormFieldControl,
     useExisting: MultiChipSelectControlComponent
@@ -225,12 +225,24 @@ export class MultiChipSelectControlComponent implements OnInit, MatFormFieldCont
   / On Init
   /***************************************************************************************************/
   ngOnInit(): void {
-    this.focusMonitor.monitor(this.input).subscribe((focused) => {
-      this.focused = !!focused;
-      this.stateChanges.next();
-    });
-    this.focusMonitor.monitor(this.input).pipe(take(1)).subscribe(() => { this.OnTouched() });
-    this.valueChangesSubscription = this.ngControl.control?.valueChanges.subscribe(value => this.OnChange(value));
+    this.focusMonitor
+      .monitor(this.input)
+      .subscribe({
+        next: (focused) => {
+          this.focused = !!focused;
+          this.stateChanges.next();
+        }
+      });
+    this.focusMonitor
+      .monitor(this.input)
+      .pipe(take(1))
+      .subscribe({
+        next: () => { this.OnTouched() }
+      });
+    this.valueChangesSubscription = this.ngControl.control?.valueChanges
+      .subscribe({
+        next: value => this.OnChange(value)
+      });
 
     // We komen de control binnen. Als er geen chips geselecteerd zijn dan maak ik de control
     // invalid. De control wordt nog niet rood omdat ik het zo heb gemaakt dat Touched true moet zijn.

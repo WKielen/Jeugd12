@@ -6,14 +6,15 @@ import { DuplicateKeyError } from 'src/app/shared/error-handling/duplicate-key-e
 import { AppError } from 'src/app/shared/error-handling/app-error';
 import { MailItem, MailService } from 'src/app/services/mail.service';
 import { BaseComponent } from 'src/app/shared/base.component';
+import { subscribeOn } from 'rxjs/operators';
 
 @Component({
   selector: 'app-register-dialog',
   templateUrl: './register.dialog.html',
   styles: ['mat-form-field {width: 100%; }',
-    `.internalcard {border: 1px solid rgba(0, 0, 0, 0.03); box-shadow: 2px 5px 5px lightgrey;
-                margin: 15px; border-radius: 5px;}`,
-    '.internalcardcontent { margin: 10px 10px 10px 20px;'
+    `.internalcard { border: 1px solid rgba(0, 0, 0, 0.03); box-shadow: 2px 5px 5px lightgrey;
+                margin: 15px; border-radius: 5px; }`,
+    '.internalcardcontent { margin: 10px 10px 10px 20px; }'
   ],
 })
 
@@ -68,23 +69,23 @@ export class RegisterDialogComponent extends BaseComponent {
     user.Password = this.password?.value;
 
     this.userService.register$(user)
-      .subscribe(addResult => {
-        if (addResult.hasOwnProperty('Key')) {
-          this.responseText = 'Registratie gelukt. \nNa goedkeuring door de vereniging krijg je een mail dat je account is geactiveerd. Vanaf dat moment kan je aanloggen.';
-          this.error = false;
-          this.sendMail(user);
-        } else {
-          this.responseText = addResult;
-        }
-      },
-        (error: AppError) => {
+      .subscribe({
+        next: (data) => {
+          if (data.hasOwnProperty('Key')) {
+            this.responseText = 'Registratie gelukt. \nNa goedkeuring door de vereniging krijg je een mail dat je account is geactiveerd. Vanaf dat moment kan je aanloggen.';
+            this.error = false;
+            this.sendMail(user);
+          } else {
+            this.responseText = data;
+          }
+        },
+        error: (error: AppError) => {
           if (error instanceof DuplicateKeyError) {
             this.responseText = "Deze gebruiker bestaat al";
             this.error = true;
           } else { throw error; }
         }
-      );
-
+      })
   }
 
   sendMail(credentials: UserItem) {
@@ -94,10 +95,15 @@ export class RegisterDialogComponent extends BaseComponent {
     mailItem.ToName = 'Secretaris - TTVN';
     mailItem.Subject = "Aanmelding gebruiker TTVN app";
     mailItem.Message = "Naam   : " + credentials.FirstName + " " + credentials.FirstName + "<br>" +
-                       "Userid : " + credentials.Userid + "<br>" +
-                       "Email  : " + credentials.Email
+      "Userid : " + credentials.Userid + "<br>" +
+      "Email  : " + credentials.Email
     mailItems.push(mailItem);
-    this.mailService.mail$(mailItems).subscribe();
+    this.mailService.mail$(mailItems)
+      .subscribe({
+        error: (error: AppError) => {
+          console.log("error", error);
+        }
+      })
   }
 
   /***************************************************************************************************

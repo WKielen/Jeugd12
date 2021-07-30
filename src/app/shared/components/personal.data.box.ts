@@ -85,9 +85,9 @@ import { BaseComponent } from '../base.component';
     `,
   styles: [
     `.internalcard {border: 1px solid rgba(0, 0, 0, 0.03); box-shadow: 2px 5px 5px lightgrey;
-             background: white; margin: 5px; border-radius: 5px;
+             background: white; margin: 5px; border-radius: 5px; }
              `,
-    '.internalcardcontent { margin: 10px 10px 10px 10px;',
+    '.internalcardcontent { margin: 10px 10px 10px 10px; }',
     '#evenementnaam { font-size: 16px; font-weight: bolder; padding: 5px 10px 0px 10px; }',
     '#table { width: 100%; tr { td { text-align: left; vertical-align: top; } } }'
   ],

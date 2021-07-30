@@ -25,14 +25,11 @@ export class ParamService extends DataService {
         map(response => {
           return atob((response as IParamItem).Value);      // atob  = decrypt
         }),
-        tap(
-          data => console.log('Received: ', data),
-          error => {
-            console.log('Not found: ', error)
-          }
-        ),
-
-        catchError(this.errorHandler)
+        tap({
+          next: data => console.log('Received: ', data),
+          error: error => console.log('Oeps: ', error)
+        }),
+          catchError(this.errorHandler)
       );
   }
 }

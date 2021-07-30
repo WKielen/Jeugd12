@@ -23,10 +23,10 @@ export class AgendaService extends DataService {
     return this.http.get(environment.baseUrl + '/agenda/getallfromnow')
     .pipe(
       retry(3),
-      tap( // Log the result or error
-        data => console.log('Received: ', data),
-        error => console.log('Oeps: ', error)
-      )
+      tap({
+        next: data => console.log('Received: ', data),
+        error: error => console.log('Oeps: ', error)
+      })
     );
   }
 
@@ -37,10 +37,11 @@ export class AgendaService extends DataService {
     return this.http.get(environment.baseUrl + '/agenda/komendeweek')
       .pipe(
         retry(3),
-        tap( // Log the result or error
-          data => console.log('Received: ', data),
-          error => console.log('Oeps: ', error)
-        )
+        tap({
+          next: data => console.log('Received: ', data),
+          error: error => console.log('Oeps: ', error)
+        })
+
       );
   }
 }

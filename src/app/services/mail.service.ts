@@ -40,10 +40,10 @@ export class MailService extends DataService {
     return this.http.post(environment.baseUrl + '/mail/sendmail', JSON.stringify(externalRecord))
       .pipe(
         retry(1),
-        tap(
-          data => console.log('Inserted: ', data),
-          error => console.log('Oeps: ', error)
-        ),
+        tap({
+          next: data => console.log('Received: ', data),
+          error: error => console.log('Oeps: ', error)
+        }),
         catchError(this.errorHandler)
       );
   }

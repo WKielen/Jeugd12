@@ -25,13 +25,10 @@ export class LedenService extends DataService {
         map(response => {
           return (response as LedenItem);
         }),
-        tap(
-          data => console.log('Received: ', data),
-          error => {
-            console.log('Not found: ', error)
-          }
-        ),
-
+        tap({
+          next: data => console.log('Received: ', data),
+          error: error => console.log('Oeps: ', error)
+        }),
         catchError(this.errorHandler)
       );
   }
