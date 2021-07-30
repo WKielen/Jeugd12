@@ -5,7 +5,7 @@
   "background_color": "#FBC02D",
   "display": "standalone",
   "scope": "/",
-  "start_url": "/index.html",
+  "start_url": "/ledenapp/index.html",
   "icons": [
     {
       "src": "assets/icons/app-logo-72x72.png",
